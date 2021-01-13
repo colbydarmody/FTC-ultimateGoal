@@ -39,7 +39,7 @@ public class Hardware {
     public DcMotor intake = null;
     public DcMotor leadScrew = null;
 
-    public Servo something = null;
+    //public Servo something = null;
 
 
     public Hardware() {
