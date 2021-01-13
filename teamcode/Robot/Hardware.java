@@ -42,9 +42,7 @@ public class Hardware {
     //public Servo something = null;
 
 
-    public Hardware() {
 
-    }
 
 
     BNO055IMU imu;
@@ -62,6 +60,10 @@ public class Hardware {
     final double BACK = -0.5;
     final int OFF = 0;
 
+    public Hardware() {
+
+    }
+   
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
