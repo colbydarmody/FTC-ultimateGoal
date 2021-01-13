@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Robot;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -36,13 +36,13 @@ public class Hardware {
     public DcMotor fr = null;
     public DcMotor bl = null;
     public DcMotor br = null;
-    public DcMotor intake = null;
-    public DcMotor leadScrew = null;
+    //public DcMotor intake = null;
+    //public DcMotor leadScrew = null;
 
     //public Servo something = null;
 
 
-
+    
 
 
     BNO055IMU imu;
@@ -63,7 +63,8 @@ public class Hardware {
     public Hardware() {
 
     }
-   
+
+
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
