@@ -60,7 +60,7 @@ public class Hardware2 {
     final double BACK = -0.5;
     final int OFF = 0;
 
-    public Hardware() {
+    public Hardware2() {
 
     }
 
