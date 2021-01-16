@@ -7,7 +7,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import java.util.Locale;
 import android.graphics.Color;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Hardware;
+import org.firstinspires.ftc.teamcode.Hardware2;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp(name="Teleop w/ intake", group="Tele")
 
 public class First_Tele_Op extends LinearOpMode {
-    Hardware robot = new Hardware();
+    Hardware2 robot = new Hardware2();
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
