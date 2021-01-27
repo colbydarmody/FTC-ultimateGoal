@@ -5,14 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import java.util.Locale;
-import android.graphics.Color;
+//import android.graphics.Color;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="Teleop 1", group="Tele")
+@TeleOp(name="Teleop", group="Tele")
 
 public class First_Tele_Op extends LinearOpMode {
     Hardware robot = new Hardware();
@@ -29,6 +29,7 @@ public class First_Tele_Op extends LinearOpMode {
         double level = -1; /// was 0.66
         double twist = 0.47;
         double manual = 0;
+
         boolean isUp = false;
 
         boolean spinIsTrueForward = true;
@@ -44,22 +45,18 @@ public class First_Tele_Op extends LinearOpMode {
 
             //////////////////////////// DRIVER 1 ------------------ DRIVER 1 //////////////////////
 
-            if(gamepad1.b){
-                superPowerReduction = 5;
-            }else{
-                superPowerReduction = 1;
-            }
+
 
             if(gamepad1.b){
-                // robot.hook0.setPosition(0.45);
-                // robot.hook1.setPosition(0.45);
-//                robot.hook0.setPosition(0.85);
-//                robot.hook1.setPosition(0.25); //Was 1
+
+                robot.shooter.setVelocity(6000);
 
             }else if(gamepad1.a){
-//                robot.hook0.setPosition(0);//Was 0.6
-//                robot.hook1.setPosition(0.9);// Was -0.8
+
+         robot.shooter.setVelocity(0);
+
             }else if(gamepad1.dpad_up) {
+
                 robot.forward(.25);
             }else if(gamepad1.dpad_down){
                 robot.backward(.25);
@@ -73,30 +70,68 @@ public class First_Tele_Op extends LinearOpMode {
                 robot.spinLeft(0.25);
             }
             else if(gamepad1.y){
-                robot.fl.setPower(-gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
-                robot.fr.setPower(gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
-                robot.bl.setPower(gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
-                robot.br.setPower(-gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
+                robot.fl.setPower(-gamepad1.left_stick_x/2 + gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
+                robot.fr.setPower(gamepad1.left_stick_x/2 + gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
+                robot.bl.setPower(gamepad1.left_stick_x/2 + gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
+                robot.br.setPower(-gamepad1.left_stick_x/2 + gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
             }else{
-                robot.fl.setPower(-gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 - gamepad1.right_stick_x/1.33333);
-                robot.fr.setPower(gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 + gamepad1.right_stick_x/1.33333);
-                robot.bl.setPower(gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 - gamepad1.right_stick_x/1.33333);
-                robot.br.setPower(-gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 + gamepad1.right_stick_x/1.33333);
+                robot.fl.setPower(-gamepad1.left_stick_x/1.33333 + gamepad1.left_stick_y/1.33333 - gamepad1.right_stick_x/1.33333);
+                robot.fr.setPower(gamepad1.left_stick_x/1.33333 + gamepad1.left_stick_y/1.33333 + gamepad1.right_stick_x/1.33333);
+                robot.bl.setPower(gamepad1.left_stick_x/1.33333 + gamepad1.left_stick_y/1.33333 - gamepad1.right_stick_x/1.33333);
+                robot.br.setPower(-gamepad1.left_stick_x/1.33333 + gamepad1.left_stick_y/1.33333 + gamepad1.right_stick_x/1.33333);
             }
 
-            telemetry.addData("X:", robot.fr.getCurrentPosition());
-            telemetry.addData("leftY", robot.getLeftYEncoder());
-            telemetry.addData("rightY", robot.getRightYEncoder());
+            telemetry.addData("Shooter Position:", robot.shooter.getCurrentPosition());
+            telemetry.addData("Shooter Velocity:", robot.shooter.getVelocity());
+
+            telemetry.update();
 
 
-            //////////////////////////// DRIVER 2 ------------------ DRIVER 2 /////////////////////
+            //////////////////////////// DRIVER 2 ------------------ DRIVER 2 //////////////////////
 
+            // rearRamp.setPosition(0.42); /////////  0.375 level
+            //  if (gamepad2.left_trigger > 0.01){
+            //       robot.rearRamp.setPosition(0.55);
+            // }else {
+            //     robot.rearRamp.setPosition(0.375); ////// was 42 sleigt down
+            // }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////SAMMIE UPDATED - Lift will completely follow stick, -100% to 100%//////////////
+            ///////////////////////If it is too fast just divide each by a constant//////////////////////
+            //////////////(i.e. gamepad2.right_stick_y/2 for 50%) - Deadzone not needed//////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
+//            robot.Lelevator.setPower(-gamepad2.right_stick_y);
+//            robot.Relevator.setPower(gamepad2.right_stick_y);
+
+            // if (Math.abs(gamepad2.right_stick_y) > 0.5){ // was 0.05
+            //     robot.Lelevator.setPower(-gamepad2.right_stick_y);
+            //     robot.Relevator.setPower(gamepad2.right_stick_y);
+            // }else{
+            //     robot.Lelevator.setPower(0);
+            //     robot.Relevator.setPower(0);
+            // }
+
+
+            if (gamepad2.a){
+                if (clampIsTrue){
+                    //robot.frontGate.setPosition(0.8); /////// open 0.3
+                    clampIsTrue = false;
+                } else {
+                    //robot.frontGate.setPosition(0.3); ///// close 0.8
+                    clampIsTrue = true;
+                }
+                sleep(200);
+            }
 
 
             //Intake
             if (gamepad2.right_bumper){
                 if (spinIsTrueForward){
-//                      robot.intake.setPower(0.5);
+//                    robot.frontGate.setPosition(0.33);
+//                    robot.rearRamp.setPosition(0.8);
+//                    robot.Rintake.setPower(-0.6);
+//                    robot.Lintake.setPower(-0.6);
 //                    spinIsTrueForward = false;
                 } else {
 //                    robot.rearRamp.setPosition(0.8);
@@ -252,3 +287,4 @@ public class First_Tele_Op extends LinearOpMode {
         }
     }
 }
+
