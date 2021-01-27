@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -17,10 +18,7 @@ public class Hardware {
 
    /*
    Strange programming facts
-
    no reset(); command. Have to use period.reset();
-
-
    */
 
     static final double INCREMENT = 0.03;     // amount to ramp motor each CYCLE_MS cycle
@@ -36,13 +34,13 @@ public class Hardware {
     public DcMotor fr = null;
     public DcMotor bl = null;
     public DcMotor br = null;
-    //public DcMotor intake = null;
+    public DcMotorEx shooter = null;
     //public DcMotor leadScrew = null;
 
     //public Servo something = null;
 
 
-    
+
 
 
     BNO055IMU imu;
@@ -75,28 +73,33 @@ public class Hardware {
         fr = hwMap.get(DcMotor.class, "fr");
         bl = hwMap.get(DcMotor.class, "bl");
         br = hwMap.get(DcMotor.class, "br");
+        shooter = hwMap.get(DcMotorEx.class, "shooter");
 
         fl.setDirection(DcMotor.Direction.REVERSE);
         bl.setDirection(DcMotor.Direction.REVERSE);
         fr.setDirection(DcMotor.Direction.FORWARD);
         br.setDirection(DcMotor.Direction.FORWARD);
+        shooter.setDirection(DcMotorEx.Direction.FORWARD);
 
         fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         // Set all motors to zero power
         fl.setPower(0);
         fr.setPower(0);
         bl.setPower(0);
         br.setPower(0);
+        shooter.setPower(0);
 
         // Set all motors to run without encoders.
         fl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
@@ -111,58 +114,7 @@ public class Hardware {
         period.reset(); //Why period?
     }
 
-    /* Initialize standard Hardware interfaces */
-    public void initNoInitBecauseISFunAndNoMove(HardwareMap ahwMap) {
-        // Save reference to Hardware map
-        hwMap = ahwMap;
 
-        // Define and Initialize Motors
-        fl = hwMap.get(DcMotor.class, "fl");
-        fr = hwMap.get(DcMotor.class, "fr");
-        bl = hwMap.get(DcMotor.class, "bl");
-        br = hwMap.get(DcMotor.class, "br");
-
-
-        fl.setDirection(DcMotor.Direction.REVERSE);
-        bl.setDirection(DcMotor.Direction.REVERSE);
-        fr.setDirection(DcMotor.Direction.FORWARD);
-        br.setDirection(DcMotor.Direction.FORWARD);
-
-
-        fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
-        // Set all motors to zero power
-        fl.setPower(0);
-        fr.setPower(0);
-        bl.setPower(0);
-        br.setPower(0);
-
-
-        // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
-        fl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-
-        parameters.mode = BNO055IMU.SensorMode.IMU;
-        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.loggingEnabled = false;
-        imu = hwMap.get(BNO055IMU.class, "imu0");
-
-        imu.initialize(parameters);
-
-        period.reset();
-
-    }
 
     double cut = 0;
 
@@ -633,4 +585,3 @@ public class Hardware {
     }
 
 }
-
