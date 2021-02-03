@@ -1,0 +1,79 @@
+package org.firstinspires.ftc.teamcode.Robot.Autonomous;
+
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.Robot.Hardware;
+
+@Autonomous(name = "Movement Test", group = "Auton")
+
+public class MovementTest extends LinearOpMode {
+
+    Hardware robot = new Hardware();
+    private ElapsedTime runtime = new ElapsedTime();
+
+    /*
+
+    TensorFlow Code Here...
+
+    */
+
+    @Override
+    public void runOpMode()  {
+
+        robot.init(hardwareMap);
+
+        telemetry.addData("Mode", "Loading...");
+        telemetry.update();
+
+        telemetry.addData("Mode", "Initiating Program...");
+        telemetry.update();
+
+        //The below was in the original code but it didn't like it...
+//        while (!isStopRequested() && !robot.imu.isGyroCalbirated())
+//        {
+//            sleep(50);
+//            idle();
+//        }
+
+        telemetry.addData(">", "Press play to start tracking");
+        telemetry.update();
+
+        waitForStart();
+
+        if (opModeIsActive());
+
+        //Move Forward
+        robot.forwardByEncoder(2, 100);
+        sleep(500);
+
+        //Move Back
+        robot.backwardByEncoder(2, -100);
+        sleep(500);
+
+        //Box Shape
+        robot.leftByEncoder(2, -100);
+        robot.forwardByEncoder(2, 100);
+        robot.rightByEncoder(2, 100);
+        robot.backwardByEncoder(2, -100);
+
+
+        telemetry.addData("Mode", "Program Complete");
+        telemetry.update();
+
+        telemetry.addData("Mode", "Press pause to stop runtime");
+        telemetry.update();
+
+        sleep(500);
+
+        telemetry.update();
+
+
+    }
+
+}
+
+
+
