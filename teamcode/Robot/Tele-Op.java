@@ -35,27 +35,79 @@ public class First_Tele_Op extends LinearOpMode {
         boolean spinIsTrueForward = true;
         boolean spinIsTrueBackward = true;
         boolean clampIsTrue = true;
+        boolean revIsTrue = true;
+        boolean wristMovement = true;
+        boolean elbowMovement = true;
 
         waitForStart();
         runtime.reset();
         while (opModeIsActive()) {
 
 
+            robot.reset();
 
 
             //////////////////////////// DRIVER 1 ------------------ DRIVER 1 //////////////////////
 
+            if (gamepad1.x){
+                if (clampIsTrue){
+                    robot.hand.setPosition(-1);
+                    clampIsTrue = false;
+                } else {
+                    robot.hand.setPosition(1);
+                    clampIsTrue = true;
+                }
+                sleep(200);
+            }
 
 
-            if(gamepad1.b){
 
-                robot.shooter.setVelocity(6000);
+            if (gamepad1.a){
+                if (revIsTrue){
+                    robot.shooter.setVelocity(6000);
+                    revIsTrue = false;
+                } else {
+                    robot.shooter.setVelocity(0);
+                    revIsTrue = true;
+                }
+                sleep(200);
+            }
 
-            }else if(gamepad1.a){
 
-         robot.shooter.setVelocity(0);
+            if (gamepad1.y){
+                if (wristMovement){
+                    robot.wrist.setPosition(0.2);
+                    wristMovement = false;
+                } else {
+                    robot.wrist.setPosition(0.8);
+                    wristMovement = true;
+                }
+                sleep(200);
+            }
 
-            }else if(gamepad1.dpad_up) {
+
+            if (gamepad1.b){
+                if (elbowMovement){
+                    robot.elbow.setPosition(0);
+                    elbowMovement = false;
+                } else {
+                    robot.elbow.setPosition(1);
+                    elbowMovement = true;
+                }
+                sleep(200);
+            }
+
+
+//            if(gamepad1.b){
+//
+//                robot.shooter.setVelocity(6000);
+//
+//            }else if(gamepad1.a){
+//
+//         robot.shooter.setVelocity(0);
+//
+//            }
+            else if(gamepad1.dpad_up) {
 
                 robot.forward(.25);
             }else if(gamepad1.dpad_down){
@@ -83,6 +135,11 @@ public class First_Tele_Op extends LinearOpMode {
 
             telemetry.addData("Shooter Position:", robot.shooter.getCurrentPosition());
             telemetry.addData("Shooter Velocity:", robot.shooter.getVelocity());
+
+            telemetry.addData("Right Encoder Position:", robot.fr.getCurrentPosition());
+            telemetry.addData("Left Encoder Position:", robot.fl.getCurrentPosition());
+            telemetry.addData("Horizontal Encoder Position:", robot.br.getCurrentPosition());
+
 
             telemetry.update();
 
