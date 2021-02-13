@@ -37,7 +37,10 @@ public class Hardware {
     public DcMotorEx shooter = null;
     //public DcMotor leadScrew = null;
 
-    //public Servo something = null;
+    public Servo hand = null;
+    public Servo wrist = null;
+    public Servo elbow = null;
+    public Servo shoulder = null;
 
 
 
@@ -101,10 +104,25 @@ public class Hardware {
         br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
+
+        hand = hwMap.get(Servo.class, "hand");
+        wrist = hwMap.get(Servo.class, "wrist");
+        elbow = hwMap.get(Servo.class, "elbow");
+        shoulder = hwMap.get(Servo.class, "shoulder");
+
+
+
+        hand.setPosition(-0.8);
+        wrist.setPosition(0.5);
+        elbow.setPosition(0.9);
+
+
+
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
         parameters.mode = BNO055IMU.SensorMode.IMU;
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         parameters.loggingEnabled = false;
         imu = hwMap.get(BNO055IMU.class, "imu0");
@@ -122,7 +140,7 @@ public class Hardware {
     public void forwardByEncoder(double speed, double distance) {
         // while (((-bl.getCurrentPosition() < distance)) && (distance - -bl.getCurrentPosition)){
         period.reset();
-        while (((bl.getCurrentPosition() < distance))) {
+        while (((fr.getCurrentPosition() < distance))) {
             fl.setPower(speed); //was positive for all
             fr.setPower(speed);
             bl.setPower(speed);
@@ -136,76 +154,15 @@ public class Hardware {
 
     // Variable speed was FORWARD
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////  Ramp Up Test /////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void forwardByEncoderRamp(double speed, double distance) {
-        // while (((-bl.getCurrentPosition() < distance)) && (distance - -bl.getCurrentPosition)){
-        while ((-bl.getCurrentPosition() < distance)) {
-            fl.setPower(speed);
-            fr.setPower(speed);
-            bl.setPower(speed);
-            br.setPower(speed);
-
-            if (distance >= 650) {
-                if (Math.abs(distance) - Math.abs(bl.getCurrentPosition()) <= 400) {
-                    //  fl.setPower(OFF);
-                    //  fr.setPower(OFF);
-                    //  bl.setPower(OFF);
-                    //  br.setPower(OFF);
-                    // Keep stepping down until we hit the min value.
-                    speed -= INCREMENT;
-                    if (rampUpPower <= 0) {
-                        rampUpPower = 0;
-                    }
-                }
-            }
-        }
-        fl.setPower(OFF);
-        fr.setPower(OFF);
-        bl.setPower(OFF);
-        br.setPower(OFF);
-    }
-
-    public void forwardByEncoderV2(double speed, double distance) {
-        period.reset();
-        while (bl.getCurrentPosition() / 307.699557 < distance) { // inches
-            double distanceToTarget = distance - -bl.getCurrentPosition() / 307.699557; //inches
-            // Uses speed to determine distance to slow down
-            double rampDownTrigger = speed * 4; // Ten because 1speed equals 10 inches, .5 = 5, so on and so forth
-
-            // Uses rampDownTrigger to determine variable to slow down by
-            double rampDownMultiplier = 1 / rampDownTrigger;
-            if ((distanceToTarget < rampDownTrigger) && (distanceToTarget > 1)) { //inches
-                double newSpeed = distanceToTarget * speed * rampDownMultiplier; //Determines Ramp Down Speed
-                fl.setPower(newSpeed);
-                fr.setPower(newSpeed);
-                bl.setPower(newSpeed);
-                br.setPower(newSpeed);
-            } else if (distanceToTarget < 1) {                    //This sets a minimum speed
-                fl.setPower(0.1);
-                fr.setPower(0.1);
-                bl.setPower(0.1);
-                br.setPower(0.1);
-            } else {                                             // This is driving at normal speed
-                fl.setPower(speed);
-                fr.setPower(speed);
-                bl.setPower(speed);
-                br.setPower(speed);
-            }                                                  // Once we reach our target, we exit the loop
-        }                                                      // This turns the wheels off
-        fl.setPower(OFF);
-        fr.setPower(OFF);
-        bl.setPower(OFF);
-        br.setPower(OFF);
-    }
 
 
-    // Method for encoder BACKWARD mpovement
+
+
+    // Method for encoder BACKWARD movement
     public void backwardByEncoder(double speed, double distance) {
         period.reset();
         // while (((-bl.getCurrentPosition() < distance)) && (distance - -bl.getCurrentPosition)){
-        while (((bl.getCurrentPosition() > distance))) {
+        while (((fr.getCurrentPosition() > distance))) {
             // was -
             fl.setPower(-speed);
             fr.setPower(-speed);
