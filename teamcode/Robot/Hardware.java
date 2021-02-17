@@ -14,6 +14,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 public class Hardware {
 
    /*
@@ -34,7 +36,7 @@ public class Hardware {
     public DcMotor fr = null;
     public DcMotor bl = null;
     public DcMotor br = null;
-    public DcMotorEx shooter = null;
+   // public DcMotorEx shooter = null;
     //public DcMotor leadScrew = null;
 
     public Servo hand = null;
@@ -76,33 +78,33 @@ public class Hardware {
         fr = hwMap.get(DcMotor.class, "fr");
         bl = hwMap.get(DcMotor.class, "bl");
         br = hwMap.get(DcMotor.class, "br");
-        shooter = hwMap.get(DcMotorEx.class, "shooter");
+       // shooter = hwMap.get(DcMotorEx.class, "shooter");
 
         fl.setDirection(DcMotor.Direction.REVERSE);
         bl.setDirection(DcMotor.Direction.REVERSE);
         fr.setDirection(DcMotor.Direction.FORWARD);
         br.setDirection(DcMotor.Direction.FORWARD);
-        shooter.setDirection(DcMotorEx.Direction.FORWARD);
+      //  shooter.setDirection(DcMotorEx.Direction.FORWARD);
 
         fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+       // shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         // Set all motors to zero power
         fl.setPower(0);
         fr.setPower(0);
         bl.setPower(0);
         br.setPower(0);
-        shooter.setPower(0);
+       // shooter.setPower(0);
 
         // Set all motors to run without encoders.
         fl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        //shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
 
         hand = hwMap.get(Servo.class, "hand");
@@ -113,8 +115,9 @@ public class Hardware {
 
 
         hand.setPosition(-0.8);
-        wrist.setPosition(0.5);
-        elbow.setPosition(0.9);
+        wrist.setPosition(0.5);// was 0.5
+        elbow.setPosition(1);/// was 0.9
+        shoulder.setPosition(0);
 
 
 
@@ -136,11 +139,10 @@ public class Hardware {
 
     double cut = 0;
 
-    // // Methods
+    // Methods
     public void forwardByEncoder(double speed, double distance) {
-        // while (((-bl.getCurrentPosition() < distance)) && (distance - -bl.getCurrentPosition)){
         period.reset();
-        while (((fr.getCurrentPosition() < distance))) {
+        while (((-fr.getCurrentPosition() < distance))) {
             fl.setPower(speed); //was positive for all
             fr.setPower(speed);
             bl.setPower(speed);
@@ -161,7 +163,6 @@ public class Hardware {
     // Method for encoder BACKWARD movement
     public void backwardByEncoder(double speed, double distance) {
         period.reset();
-        // while (((-bl.getCurrentPosition() < distance)) && (distance - -bl.getCurrentPosition)){
         while (((fr.getCurrentPosition() > distance))) {
             // was -
             fl.setPower(-speed);
@@ -182,7 +183,7 @@ public class Hardware {
     public void rightByEncoder(double speed, double distance) {
         period.reset();
         // distance = -distance;
-        while (((-fr.getCurrentPosition() < distance))) {
+        while (((br.getCurrentPosition() < distance))) {
             // Note: +speed was FORWARD, -speed was BACK
             fl.setPower(speed); //was +
             fr.setPower(-speed); //was -
@@ -199,7 +200,7 @@ public class Hardware {
     public void leftByEncoder(double speed, double distance) {
         reset();
         // distance = -distance;
-        while (((-fr.getCurrentPosition() > distance))) {
+        while (((br.getCurrentPosition() > distance))) {
             // Note: +speed was FORWARD, -speed was BACK
             fl.setPower(-speed); //was -
             fr.setPower(speed); //was +
