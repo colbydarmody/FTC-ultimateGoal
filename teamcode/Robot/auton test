@@ -100,26 +100,61 @@ public class auto extends LinearOpMode {
 //            robot.stop();
 //            sleep(100);
 
-            robot.backward(0.5);
-            sleep(1500);
-            robot.stop();
-            sleep(50);
 
-            //shoot   3////////////////////
+            robot.backward(0.5);
+            sleep(1250);
+            robot.stop();
+
+
+            robot.wrist.setPosition(0.2);
+            robot.shoulder.setPosition(0.33);
 
             robot.backward(0.5);
             sleep(250);
             robot.stop();
             sleep(50);
 
+           // sleep(2000);
+
+
+
+//            robot.shoulder.setPosition(0);
+//            sleep(150);
+//            robot.wrist.setPosition(0.8);
+//            sleep(150);
+//            robot.elbow.setPosition(0.3);
+//            sleep(1000);
+//            robot.hand.setPosition(1);
+//
+//            sleep(500000);
+
+
+
+
+            //////////////////////////////
+            //shoot   3////////////////////
+            sleep(1500);
+            //////////////////////////////
+
+            robot.backward(0.5);
+            sleep(250);
+            robot.stop();
+            sleep(50);
+
+            //////////////////////////////
             //shoot   1////////////////////
+            sleep(500);
+            ////////////////////////////////
 
             robot.backward(0.5);
             sleep(750);
             robot.stop();
             sleep(50);
 
+            ////////////////////////////////
             //shoot   3////////////////////
+            sleep(1500);
+            //////////////////////////////
 
             robot.backward(0.5);
             sleep(500);
@@ -132,6 +167,8 @@ public class auto extends LinearOpMode {
             sleep(50);
 
             //shoot  powershot 1////////////////////
+            sleep(500);
+
 
 
             robot.left(0.5);
@@ -140,6 +177,7 @@ public class auto extends LinearOpMode {
             sleep(50);
 
             //shoot  powershot 2////////////////////
+            sleep(500);
 
 
             robot.left(0.5);
@@ -148,6 +186,7 @@ public class auto extends LinearOpMode {
             sleep(50);
 
             //shoot  powershot 3////////////////////
+            sleep(500);
 
             robot.right(0.5);
             sleep(3450);
@@ -167,6 +206,12 @@ public class auto extends LinearOpMode {
             sleep(50);
 
             //// drop wobble//////////////////
+            robot.shoulder.setPosition(0);
+            robot.wrist.setPosition(0.2);
+            robot.elbow.setPosition(1);
+
+            sleep(1000);
+
 
             //// park on line
             robot.forward(0.5);
