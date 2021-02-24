@@ -17,8 +17,8 @@ import java.util.List;
 
 
 import android.graphics.Color;
-@Autonomous(name="auto", group="Auto")
-public class auto extends LinearOpMode {
+@Autonomous(name="Red Auto", group="Auto")
+public class Red_Auto extends LinearOpMode {
 
 
 
@@ -114,7 +114,7 @@ public class auto extends LinearOpMode {
             robot.stop();
             sleep(50);
 
-           // sleep(2000);
+            // sleep(2000);
 
 
 
@@ -234,5 +234,6 @@ public class auto extends LinearOpMode {
     }
 
 }
+
 
 
