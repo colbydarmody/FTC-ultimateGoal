@@ -9,14 +9,51 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+
+import java.util.List;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 public class Hardware {
+
+    public static final String TFOD_MODEL_ASSET = "UltimateGoal.tflite";
+    public static final String LABEL_FIRST_ELEMENT = "Quad";
+    public static final String LABEL_SECOND_ELEMENT = "Single";
+
+    /*
+     * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
+     * 'parameters.vuforiaLicenseKey' is initialized is for illustration only, and will not function.
+     * A Vuforia 'Development' license key, can be obtained free of charge from the Vuforia developer
+     * web site at https://developer.vuforia.com/license-manager.
+     *
+     * Vuforia license keys are always 380 characters long, and look as if they contain mostly
+     * random data. As an example, here is a example of a fragment of a valid key:
+     *      ... yIgIzTqZ4mWjk9wd3cZO9T1axEqzuhxoGlfOOI2dRzKS4T0hQ8kT ...
+     * Once you've obtained a license key, copy the string from the Vuforia web site
+     * and paste it in to your code on the next line, between the double quotes.
+     */
+    public static final String VUFORIA_KEY = "AW2S0oL/////AAABmTeGOCNGIkv0hI5YG06U96iCCZlej8M0P6YGp7XmU8L56MjcFnEFrYr7E+RBQb9Z+IwfIsoVgaSi+3BEyMf7i45HFVCppR+uMNJNpPehQWYgRCJ18hmZRySJwjxE3Iw7rhV8vAIOelPaxog8fxy7WdWgsGtxVn0EjrSMzr0XGqq/vTMoCk8FvuGFAggHT3vKqw0y4/Z1M9AsC39tzybW3eZkl8J8blTGxi3RHvGVvrXjhWcqc84R1ocZjTjoj+BPL9K8Q6JWzEPBPm7yj3iQif2zOPUdyfLfrp7+NuBLasJeD0RCs12/hkiDH6J/Wn4aV/fBoJGaIrIi7ISWSUAbePKKKrAgCesseWxpX+hVGGWc";
+
+    /**
+     * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
+     * localization engine.
+     */
+    public VuforiaLocalizer vuforia;
+
+    /**
+     * {@link #tfod} is the variable we will use to store our instance of the Tensor Flow Object
+     * Detection engine.
+     */
+    public TFObjectDetector tfod;
 
    /*
    Strange programming facts
@@ -36,13 +73,16 @@ public class Hardware {
     public DcMotor fr = null;
     public DcMotor bl = null;
     public DcMotor br = null;
-   // public DcMotorEx shooter = null;
-    //public DcMotor leadScrew = null;
+    public DcMotorEx shooter = null;
+    public DcMotor intake  = null;
+    public DcMotor elevator   = null;
 
     public Servo hand = null;
     public Servo wrist = null;
     public Servo elbow = null;
     public Servo shoulder = null;
+    public Servo flick  = null;
+
 
 
 
@@ -78,32 +118,45 @@ public class Hardware {
         fr = hwMap.get(DcMotor.class, "fr");
         bl = hwMap.get(DcMotor.class, "bl");
         br = hwMap.get(DcMotor.class, "br");
-       // shooter = hwMap.get(DcMotorEx.class, "shooter");
+        shooter = hwMap.get(DcMotorEx.class, "shooter");
+        intake = hwMap.get(DcMotor.class, "intake");
+        elevator = hwMap.get(DcMotor.class, "elevator");
 
-        fl.setDirection(DcMotor.Direction.REVERSE);
-        bl.setDirection(DcMotor.Direction.REVERSE);
+        fl.setDirection(DcMotor.Direction.FORWARD);
+        bl.setDirection(DcMotor.Direction.FORWARD);
         fr.setDirection(DcMotor.Direction.FORWARD);
         br.setDirection(DcMotor.Direction.FORWARD);
-      //  shooter.setDirection(DcMotorEx.Direction.FORWARD);
+        shooter.setDirection(DcMotorEx.Direction.REVERSE);
+        intake.setDirection(DcMotor.Direction.FORWARD);
+        elevator.setDirection(DcMotor.Direction.FORWARD);
 
         fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-       // shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        // shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
         // Set all motors to zero power
         fl.setPower(0);
         fr.setPower(0);
         bl.setPower(0);
         br.setPower(0);
-       // shooter.setPower(0);
+        shooter.setPower(0);
+        intake.setPower(0);
+        elevator.setPower(0);
+
+        // shooter.setPower(0);
 
         // Set all motors to run without encoders.
         fl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
 
@@ -111,13 +164,13 @@ public class Hardware {
         wrist = hwMap.get(Servo.class, "wrist");
         elbow = hwMap.get(Servo.class, "elbow");
         shoulder = hwMap.get(Servo.class, "shoulder");
-
-
+        flick = hwMap.get(Servo.class, "flick");
 
         hand.setPosition(-0.8);
         wrist.setPosition(0.5);// was 0.5
         elbow.setPosition(1);/// was 0.9
         shoulder.setPosition(0);
+        flick.setPosition(1);
 
 
 
@@ -425,7 +478,8 @@ public class Hardware {
      * Resets the cumulative angle tracking to zero.
      */
     public void resetAngle() {
-        lastAngles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+
 
         globalAngle = 0;
     }
@@ -540,6 +594,58 @@ public class Hardware {
         br.setPower(0);
 
         // wait for rotation to stop.
+    }
+
+    /**
+     * Initialize the Vuforia localization engine.
+     */
+    public void initVuforia() {
+        /*
+         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
+         */
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+
+        parameters.vuforiaLicenseKey = VUFORIA_KEY;
+        parameters.cameraName = hwMap.get(WebcamName.class, "Webcam 1");
+
+        //  Instantiate the Vuforia engine
+        vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
+        // Loading trackables is not necessary for the Tensor Flow Object Detection engine.
+    }
+
+    /**
+     * Initialize the Tensor Flow Object Detection engine.
+     */
+    public void scanRings() {
+            if (tfod != null) {
+                // getUpdatedRecognitions() will return null if no new information is available since
+                // the last time that call was made.
+                List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                if (updatedRecognitions != null) {
+                    telemetry.addData("# Object Detected", updatedRecognitions.size());
+                    // step through the list of recognitions and display boundary info.
+                    int i = 0;
+                    for (Recognition recognition : updatedRecognitions) {
+                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                        telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                                recognition.getLeft(), recognition.getTop());
+                        telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                                recognition.getRight(), recognition.getBottom());
+                    }
+                    telemetry.update();
+                }
+            }
+        }
+
+
+
+    public void initTfod() {
+        int tfodMonitorViewId = hwMap.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", hwMap.appContext.getPackageName());
+        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
+        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT);
     }
 
 }
