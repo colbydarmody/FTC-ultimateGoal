@@ -434,6 +434,42 @@ public class Hardware {
         br.setPower(-Math.abs(speed));
     }
 
+        // Method for moving wobble goal out of the way of shooter
+    public void wobbleLaunch() {
+        //Move all components out of the way of shooter
+        hand.setPosition(0);
+        wrist.setPosition(0);
+        elbow.setPosition(0);
+        shoulder.setPosition(0);
+    }
+
+    //Method for "resting" Wobble arm position
+    public void wobbleRest(){
+        //Move all components into dropping position
+        hand.setPosition(0);
+        wrist.setPosition(0);
+        elbow.setPosition(0);
+        shoulder.setPosition(0);
+    }
+
+    //Method for dropping wobble goal
+    public void wobbleDrop(){
+        //Move all components into dropping position
+        hand.setPosition(0);
+        wrist.setPosition(0);
+        elbow.setPosition(0);
+        shoulder.setPosition(0);
+    }
+
+    //Method for lifting wobble goal
+    public void wobbleLift(){
+        //Move all components into dropping position
+        hand.setPosition(0);
+        wrist.setPosition(0);
+        elbow.setPosition(0);
+        shoulder.setPosition(0);
+    }
+    
     // Method for not moving
     public void stop() {
         fl.setPower(OFF);
