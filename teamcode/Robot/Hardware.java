@@ -438,8 +438,8 @@ public class Hardware {
     public void wobbleLaunch() {
         //Move all components out of the way of shooter
         hand.setPosition(0);
-        wrist.setPosition(0);
-        elbow.setPosition(0);
+        wrist.setPosition(0.2);
+        elbow.setPosition(1);
         shoulder.setPosition(0);
     }
 
@@ -447,17 +447,18 @@ public class Hardware {
     public void wobbleRest(){
         //Move all components into dropping position
         hand.setPosition(0);
-        wrist.setPosition(0);
-        elbow.setPosition(0);
+        wrist.setPosition(0.2);
+        elbow.setPosition(1);
         shoulder.setPosition(0);
     }
 
     //Method for dropping wobble goal
     public void wobbleDrop(){
         //Move all components into dropping position
+        ///Only one that is correct
         hand.setPosition(0);
-        wrist.setPosition(0);
-        elbow.setPosition(0);
+        wrist.setPosition(0.2);
+        elbow.setPosition(1);
         shoulder.setPosition(0);
     }
 
@@ -465,8 +466,8 @@ public class Hardware {
     public void wobbleLift(){
         //Move all components into dropping position
         hand.setPosition(0);
-        wrist.setPosition(0);
-        elbow.setPosition(0);
+        wrist.setPosition(0.2);
+        elbow.setPosition(1);
         shoulder.setPosition(0);
     }
     
