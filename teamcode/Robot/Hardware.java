@@ -21,6 +21,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
+import static java.lang.Thread.sleep;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 public class Hardware {
@@ -74,18 +75,14 @@ public class Hardware {
     public DcMotor bl = null;
     public DcMotor br = null;
     public DcMotorEx shooter = null;
-    public DcMotor intake  = null;
-    public DcMotor elevator   = null;
+    public DcMotor intake = null;
+    public DcMotor elevator = null;
 
     public Servo hand = null;
     public Servo wrist = null;
     public Servo elbow = null;
     public Servo shoulder = null;
-    public Servo flick  = null;
-
-
-
-
+    public Servo flick = null;
 
 
     BNO055IMU imu;
@@ -122,8 +119,8 @@ public class Hardware {
         intake = hwMap.get(DcMotor.class, "intake");
         elevator = hwMap.get(DcMotor.class, "elevator");
 
-        fl.setDirection(DcMotor.Direction.FORWARD);
-        bl.setDirection(DcMotor.Direction.FORWARD);
+        fl.setDirection(DcMotor.Direction.REVERSE);//FORWARD
+        bl.setDirection(DcMotor.Direction.REVERSE);//REVERSE
         fr.setDirection(DcMotor.Direction.FORWARD);
         br.setDirection(DcMotor.Direction.FORWARD);
         shooter.setDirection(DcMotorEx.Direction.REVERSE);
@@ -173,7 +170,6 @@ public class Hardware {
         flick.setPosition(1);
 
 
-
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
         parameters.mode = BNO055IMU.SensorMode.IMU;
@@ -187,7 +183,6 @@ public class Hardware {
 
         period.reset(); //Why period?
     }
-
 
 
     double cut = 0;
@@ -208,9 +203,6 @@ public class Hardware {
     }
 
     // Variable speed was FORWARD
-
-
-
 
 
     // Method for encoder BACKWARD movement
@@ -410,6 +402,7 @@ public class Hardware {
         br.setPower(FORWARD);
     }
 
+
     // Method for spinning left -- select speed
     public void spinLeft(double speed) {
         fl.setPower(-Math.abs(speed));
@@ -434,43 +427,63 @@ public class Hardware {
         br.setPower(-Math.abs(speed));
     }
 
-        // Method for moving wobble goal out of the way of shooter
+    // Method for moving wobble goal out of the way of shooter
     public void wobbleLaunch() {
         //Move all components out of the way of shooter
         hand.setPosition(0);
-        wrist.setPosition(0.2);
-        elbow.setPosition(1);
-        shoulder.setPosition(0);
+        wrist.setPosition(0.3);
+        elbow.setPosition(0.9);
+        shoulder.setPosition(0.65);
     }
 
     //Method for "resting" Wobble arm position
-    public void wobbleRest(){
-        //Move all components into dropping position
+    public void wobbleRest() {
+        //Move all components into resting position
         hand.setPosition(0);
-        wrist.setPosition(0.2);
+        wrist.setPosition(0.5);
         elbow.setPosition(1);
         shoulder.setPosition(0);
     }
 
     //Method for dropping wobble goal
-    public void wobbleDrop(){
-        //Move all components into dropping position
-        ///Only one that is correct
-        hand.setPosition(0);
-        wrist.setPosition(0.2);
+    public void wobbleDrop() {
+//        robot.shoulder.setPosition(0);
+//        robot.elbow.setPosition(0.7);
+//        //sleep(500);
+//        robot.wrist.setPosition(0.65);
+//        //sleep(500);
+//        robot.elbow.setPosition(0.2);
+//        sleep(1500);
+//
+//        robot.backward(0.5);
+//        sleep(1250);
+//        robot.stop();
+//
+//        robot.hand.setPosition(1);
+
+    }
+
+
+    ////////////////////////// Method for back grab/////////////////////
+//              robot.elbow.setPosition(0.7);
+//                robot.shoulder.setPosition(0.66);
+//                robot.elbow.setPosition(0.2);
+//              sleep(1250);
+//
+//                robot.backward(0.5);
+//                  sleep(2250);
+//                robot.stop();
+//
+//                robot.hand.setPosition(0);
+
+    //Method for lifting wobble goal
+    public void wobbleLift() {
+        //Move all components into lifting position
+        wrist.setPosition(0.5);
         elbow.setPosition(1);
         shoulder.setPosition(0);
     }
 
-    //Method for lifting wobble goal
-    public void wobbleLift(){
-        //Move all components into dropping position
-        hand.setPosition(0);
-        wrist.setPosition(0.2);
-        elbow.setPosition(1);
-        shoulder.setPosition(0);
-    }
-    
     // Method for not moving
     public void stop() {
         fl.setPower(OFF);
@@ -515,7 +528,6 @@ public class Hardware {
      * Resets the cumulative angle tracking to zero.
      */
     public void resetAngle() {
-
 
 
         globalAngle = 0;
@@ -655,26 +667,25 @@ public class Hardware {
      * Initialize the Tensor Flow Object Detection engine.
      */
     public void scanRings() {
-            if (tfod != null) {
-                // getUpdatedRecognitions() will return null if no new information is available since
-                // the last time that call was made.
-                List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
-                if (updatedRecognitions != null) {
-                    telemetry.addData("# Object Detected", updatedRecognitions.size());
-                    // step through the list of recognitions and display boundary info.
-                    int i = 0;
-                    for (Recognition recognition : updatedRecognitions) {
-                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                        telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                                recognition.getLeft(), recognition.getTop());
-                        telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                                recognition.getRight(), recognition.getBottom());
-                    }
-                    telemetry.update();
+        if (tfod != null) {
+            // getUpdatedRecognitions() will return null if no new information is available since
+            // the last time that call was made.
+            List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+            if (updatedRecognitions != null) {
+                telemetry.addData("# Object Detected", updatedRecognitions.size());
+                // step through the list of recognitions and display boundary info.
+                int i = 0;
+                for (Recognition recognition : updatedRecognitions) {
+                    telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                    telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                            recognition.getLeft(), recognition.getTop());
+                    telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                            recognition.getRight(), recognition.getBottom());
                 }
+                telemetry.update();
             }
         }
-
+    }
 
 
     public void initTfod() {
