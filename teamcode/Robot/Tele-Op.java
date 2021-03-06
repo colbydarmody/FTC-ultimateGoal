@@ -42,7 +42,7 @@ public class Tele_Op extends LinearOpMode {
         boolean wristMovement = true;
         boolean elbowMovement = true;
         boolean intakeIsTrue = true;
-
+        boolean elevatorIsTrue = true;
         waitForStart();
         runtime.reset();
         robot.reset();
@@ -124,13 +124,23 @@ public class Tele_Op extends LinearOpMode {
 
 
             /// Elevator/////////////////
-//            if (gamepad2.left_bumper = true) {
-//                if (intakeIsTrue) {
+            if (gamepad2.left_stick_y > 0.1){
+                robot.elevator.setPower(0.5);
+            } else if (-gamepad2.left_stick_y < -0.1){
+                robot.elevator.setPower(-0.5);
+            } else {
+                robot.elevator.setPower(0);
+            }
+            //robot.elevator.setPower(gamepad2.left_stick_y);
+
+
+//            if (gamepad2.left_bumper) {
+//                if (elevatorIsTrue) {
 //                    robot.elevator.setPower(1);
-//                    intakeIsTrue = false;
+//                    elevatorIsTrue = false;
 //                } else {
 //                    robot.elevator.setPower(-1);
-//                    intakeIsTrue = true;
+//                    elevatorIsTrue = true;
 //                }
 //
 //            }
