@@ -77,6 +77,15 @@ public class Hardware {
     public DcMotorEx shooter = null;
     public DcMotor intake = null;
     public DcMotor elevator = null;
+     /**
+     *
+     Consider changing elevator to DcMotorEx or DcMotorImplEx, both of which have a better
+     .setTargetPosition than the regular DcMotor does. If we decided to switch, I would say to
+     go for the DcMotorImplEx, because it is pretty much DcMotorEx but with more features.
+     ~~Meg
+     *
+     **/
+
 
     public Servo hand = null;
     public Servo wrist = null;
@@ -483,6 +492,19 @@ public class Hardware {
         elbow.setPosition(1);
         shoulder.setPosition(0);
     }
+    
+    ////TEST
+     public void elevatorUp(){
+     elevator.setPower(100);
+        while (elevator.getCurrentPosition() < 755){
+                  elevator.setPower(100);
+        }
+            elevator.setPower(20);
+
+    }
+
+    
+    
 
     // Method for not moving
     public void stop() {
