@@ -77,15 +77,6 @@ public class Hardware {
     public DcMotorEx shooter = null;
     public DcMotor intake = null;
     public DcMotor elevator = null;
-     /**
-     *
-     Consider changing elevator to DcMotorEx or DcMotorImplEx, both of which have a better
-     .setTargetPosition than the regular DcMotor does. If we decided to switch, I would say to
-     go for the DcMotorImplEx, because it is pretty much DcMotorEx but with more features.
-     ~~Meg
-     *
-     **/
-
 
     public Servo hand = null;
     public Servo wrist = null;
@@ -176,7 +167,7 @@ public class Hardware {
         wrist.setPosition(0.5);// was 0.5
         elbow.setPosition(1);/// was 0.9
         shoulder.setPosition(0);
-        flick.setPosition(1);
+        flick.setPosition(0.45);
 
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -270,6 +261,22 @@ public class Hardware {
         bl.setPower(OFF);
         br.setPower(OFF);
     }
+
+    public void upByEncoder(double speed, double distance) {
+        period.reset();
+        while (((elevator.getCurrentPosition() < distance))) {
+            fl.setPower(speed); //was positive for all
+            fr.setPower(speed);
+            bl.setPower(speed);
+            br.setPower(speed);
+        }
+        fl.setPower(OFF);
+        fr.setPower(OFF);
+        bl.setPower(OFF);
+        br.setPower(OFF);
+    }
+
+
 
     // Method for driving forwards -- default
     public void forward() {
@@ -492,19 +499,6 @@ public class Hardware {
         elbow.setPosition(1);
         shoulder.setPosition(0);
     }
-    
-    ////TEST
-     public void elevatorUp(){
-     elevator.setPower(100);
-        while (elevator.getCurrentPosition() < 755){
-                  elevator.setPower(100);
-        }
-            elevator.setPower(20);
-
-    }
-
-    
-    
 
     // Method for not moving
     public void stop() {
