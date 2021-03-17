@@ -168,7 +168,14 @@ public class Hardware {
         elbow.setPosition(1);/// was 0.9
         shoulder.setPosition(0);
         flick.setPosition(0.45);
+        
+        //Elevator Init Position
+        elevator.setTargetPosition(0); //This way the elevator will init as low as possible
+        elevator.setPower(0); //I don't think we need to set power yet, if we do it probably
+        //will not stay at position 0
 
+        // Will only be able to move within this number range
+        elevator.setTargetPositionTolerance(0 - 755)
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
