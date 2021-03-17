@@ -76,8 +76,8 @@ public class Hardware {
     public DcMotor br = null;
     public DcMotorEx shooter = null;
     public DcMotor intake = null;
-    public DcMotor elevator = null;
-
+    public DcMotorImplEx elevator = null;
+    
     public Servo hand = null;
     public Servo wrist = null;
     public Servo elbow = null;
@@ -117,7 +117,7 @@ public class Hardware {
         br = hwMap.get(DcMotor.class, "br");
         shooter = hwMap.get(DcMotorEx.class, "shooter");
         intake = hwMap.get(DcMotor.class, "intake");
-        elevator = hwMap.get(DcMotor.class, "elevator");
+        elevator = hwMap.get(DcMotorImplEx.class, "elevator");
 
         fl.setDirection(DcMotor.Direction.REVERSE);//FORWARD
         bl.setDirection(DcMotor.Direction.REVERSE);//REVERSE
