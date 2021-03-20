@@ -76,8 +76,8 @@ public class Hardware {
     public DcMotor br = null;
     public DcMotorEx shooter = null;
     public DcMotor intake = null;
-    public DcMotorImplEx elevator = null;
-    
+    public DcMotor elevator = null;
+
     public Servo hand = null;
     public Servo wrist = null;
     public Servo elbow = null;
@@ -117,7 +117,7 @@ public class Hardware {
         br = hwMap.get(DcMotor.class, "br");
         shooter = hwMap.get(DcMotorEx.class, "shooter");
         intake = hwMap.get(DcMotor.class, "intake");
-        elevator = hwMap.get(DcMotorImplEx.class, "elevator");
+        elevator = hwMap.get(DcMotor.class, "elevator");
 
         fl.setDirection(DcMotor.Direction.REVERSE);//FORWARD
         bl.setDirection(DcMotor.Direction.REVERSE);//REVERSE
@@ -154,7 +154,6 @@ public class Hardware {
         shooter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
 
         hand = hwMap.get(Servo.class, "hand");
@@ -163,19 +162,12 @@ public class Hardware {
         shoulder = hwMap.get(Servo.class, "shoulder");
         flick = hwMap.get(Servo.class, "flick");
 
-        hand.setPosition(-0.8);
+        hand.setPosition(0);
         wrist.setPosition(0.5);// was 0.5
         elbow.setPosition(1);/// was 0.9
         shoulder.setPosition(0);
-        flick.setPosition(0.45);
-        
-        //Elevator Init Position
-        elevator.setTargetPosition(0); //This way the elevator will init as low as possible
-        elevator.setPower(0); //I don't think we need to set power yet, if we do it probably
-        //will not stay at position 0
+        flick.setPosition(0);
 
-        // Will only be able to move within this number range
-        elevator.setTargetPositionTolerance(0 - 755)
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
@@ -529,12 +521,9 @@ public class Hardware {
         fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        fl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
     }
 
