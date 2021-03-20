@@ -1,219 +1,153 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@CJD14147 
+CJD14147
+/
+FTC-ultimateGoal
+3
+11
+Code
+Issues
+4
+Pull requests
+1
+Actions
+Projects
+1
+Wiki
+Security
+Insights
+Settings
+FTC-ultimateGoal
+/
+teamcode
+/
+Robot
+/
+Tele-Op.java
+in
+main
+ 
+
+Spaces
+
+4
+
+No wrap
+1
 package org.firstinspires.ftc.teamcode;
-
+2
+​
+3
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+4
 import com.qualcomm.robotcore.robot.Robot;
+5
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+6
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+7
+​
+8
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
-
+9
+​
+10
 import java.util.Locale;
+11
 //import android.graphics.Color;
+12
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+13
 import org.firstinspires.ftc.teamcode.Hardware;
-
+14
+​
+15
 import com.qualcomm.robotcore.hardware.DcMotor;
+16
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
+17
+​
+18
 @TeleOp(name = "Teleop", group = "Tele")
-
+19
+​
+20
 public class Tele_Op extends LinearOpMode {
+21
     Hardware robot = new Hardware();
+22
     private ElapsedTime runtime = new ElapsedTime();
-
+23
+​
+24
     @Override
+25
     public void runOpMode() {
-
+26
+​
+27
         robot.init(hardwareMap);
+28
         sleep(500);
-
+29
+​
+30
         int superPowerReduction = 1;
+31
         int powerReduction = 1;
+32
         double level = -1; /// was 0.66
+33
         double twist = 0.47;
+34
         double manual = 0;
-
+35
+​
+36
         boolean isUp = false;
-
+37
+​
+38
         boolean spinIsTrueForward = true;
+39
         boolean spinIsTrueBackward = true;
+40
         boolean clampIsTrue = true;
+41
         boolean revIsTrue = true;
+42
         boolean wristMovement = true;
+43
         boolean elbowMovement = true;
+44
         boolean intakeIsTrue = true;
+45
         boolean elevatorIsTrue = true;
-        boolean flickIsTrue = true;
-
-//        robot.hand.setPosition(0);
-//        robot.wrist.setPosition(0.3);
-//        robot.elbow.setPosition(0.9);
-//        robot.shoulder.setPosition(0.65);
-
-        waitForStart();
-        runtime.reset();
-        robot.resetAngle();
-        robot.reset();
-        while (opModeIsActive()) {
-
-
-            //////////////////////////// DRIVER 1 ------------------ DRIVER 1 //////////////////////
-
-
-            if (gamepad1.dpad_up) {
-                robot.forward(.25);
-            } else if (gamepad1.dpad_down) {
-                robot.backward(.25);
-            } else if (gamepad1.dpad_left) {
-                robot.left(.25);
-            } else if (gamepad1.dpad_right) {
-                robot.right(.25);
-            } else if (gamepad1.left_bumper) {
-                robot.spinRight(0.25);
-            } else if (gamepad1.right_bumper) {
-                robot.spinLeft(0.25);
-            } else if (gamepad1.y) {
-                robot.fl.setPower(-gamepad1.left_stick_x / 2 + gamepad1.left_stick_y / 2 - gamepad1.right_stick_x / 2);
-                robot.fr.setPower(gamepad1.left_stick_x / 2 + gamepad1.left_stick_y / 2 + gamepad1.right_stick_x / 2);
-                robot.bl.setPower(gamepad1.left_stick_x / 2 + gamepad1.left_stick_y / 2 - gamepad1.right_stick_x / 2);
-                robot.br.setPower(-gamepad1.left_stick_x / 2 + gamepad1.left_stick_y / 2 + gamepad1.right_stick_x / 2);
-            } else {
-                robot.fl.setPower(-gamepad1.left_stick_x / 1.33333 + gamepad1.left_stick_y / 1.33333 - gamepad1.right_stick_x / 1.33333);
-                robot.fr.setPower(gamepad1.left_stick_x / 1.33333 + gamepad1.left_stick_y / 1.33333 + gamepad1.right_stick_x / 1.33333);
-                robot.bl.setPower(gamepad1.left_stick_x / 1.33333 + gamepad1.left_stick_y / 1.33333 - gamepad1.right_stick_x / 1.33333);
-                robot.br.setPower(-gamepad1.left_stick_x / 1.33333 + gamepad1.left_stick_y / 1.33333 + gamepad1.right_stick_x / 1.33333);
-            }
-
-//            telemetry.addData("Shooter Position:", robot.shooter.getCurrentPosition());
-            //       telemetry.addData("Shooter Velocity:", robot.shooter.getVelocity());
-
-
-            // telemetry.update();
-
-
-            //////////////////////////// DRIVER 2 ------------------ DRIVER 2 /////////////////////
-
-
-            /////// Shooter ////////////////////
-            if (gamepad2.right_trigger > 0.05) {
-                robot.shooter.setVelocity(1650);//// was 1850
-            } else {
-                robot.shooter.setVelocity(0);
-            }
-
-
-
-            //////////////Flick//////////////////////
-            if (gamepad2.right_bumper) {
-                robot.flick.setPosition(0.3);//in
-                sleep(400);
-                robot.flick.setPosition(0.45);//out
-            }
-
-
-              ///////////////////////////Intake//////////////////////////////
-
-//            if (gamepad2.right_bumper) {
-//                if (intakeIsTrue) {
-//                    robot.intake.setPower(1);
-//                    intakeIsTrue = false;
-//                } else {
-//                    robot.intake.setPower(-1);
-//                    intakeIsTrue = true;
-//                }
-//                sleep(200);
-//            }
-
-
-            ////off and up
-            if (robot.elevator.getCurrentPosition() > 500) {
-                robot.intake.setPower(0);
-            }
-
-            //// outake and mid
-            if (robot.elevator.getCurrentPosition() > 200 && robot.elevator.getCurrentPosition() < 500) {
-                robot.intake.setPower(1);
-            }
-
-            //intake and down
-            if (robot.elevator.getCurrentPosition() < 200){
-                robot.intake.setPower(-1);
-            }
-
-
-
-
-            //////////////// Elevator/////////////////
-
-            //   || robot.elevator.getCurrentPosition() == 760
-            if (gamepad2.left_stick_y > 0.5) {
-                while (robot.elevator.getCurrentPosition() < 755) {
-                    robot.elevator.setPower(gamepad2.left_stick_y);
-                }
-                robot.elevator.setPower(0.35);
-            }
-
-            if (gamepad2.left_stick_y < -0.5) {
-                while (robot.elevator.getCurrentPosition() > 70) {
-                    robot.elevator.setPower(gamepad2.left_stick_y);
-                }
-                robot.elevator.setPower(0.35);
-            }
-
-
-            /////////////////// Shoulder //////////////////////////
-            if (gamepad2.dpad_right) {
-                robot.shoulder.setPosition(0.5);
-            }
-
-            if (gamepad2.dpad_left) {
-                robot.shoulder.setPosition(0);
-            }
-
-
-            //////////////// ELbow //////////////////////
-            if (gamepad2.dpad_up) {
-                robot.elbow.setPosition(0);
-            }
-
-            if (gamepad2.dpad_down) {
-                robot.elbow.setPosition(1);
-            }
-
-            /////////////////////////////// Grab //////////////////////////
-            if (gamepad2.a) {
-                if (clampIsTrue) {
-                    robot.hand.setPosition(-1);
-                    clampIsTrue = false;
-                } else {
-                    robot.hand.setPosition(1);
-                    clampIsTrue = true;
-                }
-
-            }
-
-            ////////////////////// Wrist ////////////////////
-            if (gamepad2.b) {
-                if (wristMovement) {
-                    robot.wrist.setPosition(0.2);
-                    wristMovement = false;
-                } else {
-                    robot.wrist.setPosition(0.8);
-                    wristMovement = true;
-                }
-
-            }
-
-            telemetry.addData("Shooter Velocity:", robot.shooter.getVelocity());
-            telemetry.addData("Elevator Encoder Position:", robot.elevator.getCurrentPosition());
-            telemetry.addData("Right Encoder Position:", robot.fr.getCurrentPosition());
-            telemetry.addData("Left Encoder Position:", robot.fl.getCurrentPosition());
-            telemetry.addData("Horizontal Encoder Position:", robot.br.getCurrentPosition());
-            telemetry.update();
-
-
-        }
-    }
-}
-
-
+@CJD14147
+Commit changes
+Commit summary
+Create Tele-Op.java
+Optional extended description
+Add an optional extended description…
+ Commit directly to the main branch.
+ Create a new branch for this commit and start a pull request. Learn more about pull requests.
+ 
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
