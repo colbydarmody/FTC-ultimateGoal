@@ -115,81 +115,53 @@ public class Tele_Op extends LinearOpMode {
             }
 
 
-//            if (gamepad2.y) {
-//                robot.flick.setPosition(0);//in
-//
-//            }
-
 
             ///////////////////////////Intake//////////////////////////////
-
-            if (gamepad1.right_bumper) {
-                if (intakeIsTrue) {
-                    robot.intake.setPower(-1);
-                    intakeIsTrue = false;
-                } else {
-                    robot.intake.setPower(1);
-                    intakeIsTrue = true;
-                }
-                sleep(200);
-            }
+//
+//            if (gamepad1.right_bumper) {
+//                if (intakeIsTrue) {
+//                    robot.intake.setPower(-1);
+//                    intakeIsTrue = false;
+//                } else {
+//                    robot.intake.setPower(1);
+//                    intakeIsTrue = true;
+//                }
+//                sleep(200);
+//            }
 
 //
 
             ////off and up
-            if (robot.elevator.getCurrentPosition() < -900) {  /////// no
+            if (robot.elevator.getCurrentPosition() < -900) {
                 robot.intake.setPower(0);
             }
 
             //// outake and mid
-            if (robot.elevator.getCurrentPosition() > -200 && robot.elevator.getCurrentPosition() < -900) {    //// no
-                robot.intake.setPower(-1);
-            }
-
-            //intake and down
-            if (robot.elevator.getCurrentPosition() < -200) {  //// yes
+            if (robot.elevator.getCurrentPosition() < -200 && robot.elevator.getCurrentPosition() > -900) {
                 robot.intake.setPower(1);
             }
 
-            if (gamepad2.y) {
+            //intake and down
+            if (robot.elevator.getCurrentPosition() > -200) {
                 robot.intake.setPower(-1);
             }
 
 
+
             ////////////// Elevator/////////////////
-
-
-//            if (gamepad2.left_stick_y > Math.abs(0.2)) {
-//                    robot.elevator.setPower(gamepad2.left_stick_y);
-//            }
-
-            //            || robot.elevator.getCurrentPosition() == 760
-
-
-//            if (gamepad2.left_stick_y > Math.abs(0.2)) {
-//                robot.elevator.setPower(gamepad2.left_stick_y);
-//            }
-//
-//            if (gamepad2.left_stick_y > Math.abs(0.2)) {
-//                while (robot.elevator.getCurrentPosition() > -1160) {
-//                    robot.elevator.setPower(gamepad2.left_stick_y);
-//                }
-//            } else {
-//                robot.elevator.setPower(0);
-//            }
-
-
             if (gamepad2.left_stick_y > 0.2) {
-                while (robot.elevator.getCurrentPosition() > -1160) {
+                if (robot.elevator.getCurrentPosition() > -1175) {
+                    robot.elevator.setPower(gamepad2.left_stick_y);
+                }
+
+            }
+            if (gamepad2.left_stick_y < -0.2) {
+                if (robot.elevator.getCurrentPosition() < 0) {
                     robot.elevator.setPower(gamepad2.left_stick_y);
                 }
             }
-
-
-            if (gamepad2.left_stick_y < -0.2) {
-                robot.elevator.setPower(gamepad2.left_stick_y);
-
-                //robot.elevator.setPower(0);
+            else {
+                robot.elevator.setPower(gamepad2.left_stick_y/3);
             }
 
 
