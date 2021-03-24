@@ -65,6 +65,13 @@ public class Tele_Op extends LinearOpMode {
             ////////////////////////// DRIVER 1 ------------------ DRIVER 1 //////////////////////
 
 
+            if (gamepad1.a){
+                robot.lightsaber.setPosition(0.65);
+            } else{
+                robot.lightsaber.setPosition(0);
+            }
+
+
             if (gamepad1.dpad_up) {
                 robot.forward(.25);
             } else if (gamepad1.dpad_down) {
@@ -101,7 +108,7 @@ public class Tele_Op extends LinearOpMode {
 
             /////// Shooter ////////////////////
             if (gamepad2.right_trigger > 0.05) {
-                robot.shooter.setVelocity(1650);//// was 1850
+                robot.shooter.setVelocity(1650);//// was 1650
             } else {
                 robot.shooter.setVelocity(0);
             }
@@ -109,10 +116,11 @@ public class Tele_Op extends LinearOpMode {
 
             //////////////Flick//////////////////////
             if (gamepad2.right_bumper) {
-                robot.flick.setPosition(0.38);//in
+                robot.flick.setPosition(0.33);//in
                 sleep(200);
                 robot.flick.setPosition(0);//out
             }
+
 
 
 
