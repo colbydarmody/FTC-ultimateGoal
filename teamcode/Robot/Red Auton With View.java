@@ -37,6 +37,7 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 @Autonomous(name = "Red Auto Vuforia", group = "Auto")
 
 
+
 public class Red_Auton_Vuforia extends LinearOpMode {
 
 
@@ -77,7 +78,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 16.0/9.0);
+            tfod.setZoom(2.8, 16.0/9.0);
         }
 
         robot.init(hardwareMap);
@@ -103,7 +104,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
         robot.resetAngle();
 
 
-        robot.reset();
+        //robot.reset();
 
 
         telemetry.update();
@@ -121,6 +122,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
             telemetry.update();
             waitForStart();
 
+            int stack = 0;
             if (opModeIsActive()) {
                 while (opModeIsActive()) {
                     if (tfod != null) {
@@ -133,6 +135,13 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                             int i = 0;
                             for (Recognition recognition : updatedRecognitions) {
                                 telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+
+                                if(recognition.getLabel() == "Single"){
+                                    stack = 1;
+                                }else if(recognition.getLabel() == "Quad"){
+                                    stack = 4;
+                                }
+                                telemetry.addData(String.format("Stack height: %d", stack), recognition.getLabel());
                                 telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
                                         recognition.getLeft(), recognition.getTop());
                                 telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
@@ -141,12 +150,177 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                             telemetry.update();
                         }
                     }
-                }
-            }
+
 
             if (tfod != null) {
                 tfod.shutdown();
             }
+
+
+
+            if (stack == 0){
+                robot.forward(0.5);
+                sleep(1250);
+                robot.stop();
+            }
+
+            if (stack == 1){
+                robot.left(0.5);
+                sleep(1250);
+                robot.stop();
+            }
+
+            if (stack == 4){
+                robot.forward(0.5);
+                sleep(1250);
+                robot.stop();
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////   Spin Up Shooter   ////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                robot.elevator.setPower(-1);
+                boolean done = false;
+                while(!done && opModeIsActive() && !isStopRequested()){
+                    if (robot.elevator.getCurrentPosition() < -1175) {  ////////////////////////// change encoder value
+                        done = true;
+                    }
+                    telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
+                    telemetry.update();
+                }
+                robot.elevator.setPower(-0.2);
+                robot.stop();
+
+
+                sleep(5000);
+
+
+                robot.wobbleLaunch();
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                robot.forward(0.5);
+                sleep(250);
+                robot.stop();
+                sleep(50);
+
+                // sleep(2000);
+
+
+//            robot.shoulder.setPosition(0);
+//            sleep(150);
+//            robot.wrist.setPosition(0.8);
+//            sleep(150);
+//            robot.elbow.setPosition(0.3);
+//            sleep(1000);
+//
+//            sleep(500000);
+
+
+                //////////////////////////////
+                //shoot   3////////////////////
+                sleep(1500);
+                //////////////////////////////
+
+                robot.forward(0.5);
+                sleep(250);
+                robot.stop();
+                sleep(50);
+
+                robot.forward(0.5);
+                sleep(750);
+                robot.stop();
+                sleep(50);
+
+
+                robot.forward(0.5);
+                sleep(500);
+                robot.stop();
+                sleep(50);
+
+                robot.left(0.3);
+                sleep(500);
+                robot.stop();
+                sleep(50);
+
+                //shoot  powershot 1////////////////////
+                sleep(500);
+
+
+                robot.left(0.5);
+                sleep(350);
+                robot.stop();
+                sleep(50);
+
+                //shoot  powershot 2////////////////////
+                sleep(500);
+
+
+                robot.left(0.5);
+                sleep(350);
+                robot.stop();
+                sleep(50);
+
+                //shoot  powershot 3////////////////////
+                sleep(500);
+
+                robot.right(0.5);
+                sleep(3450);
+                robot.stop();
+                sleep(50);
+
+                robot.left(0.5);
+                sleep(200);
+                robot.stop();
+                sleep(50);
+
+
+                /////move to drop wobble
+                robot.backward(0.5);
+                sleep(2400);
+                robot.stop();
+                sleep(50);
+
+                //// drop wobble//////////////////
+//        robot.shoulder.setPosition(0);
+//        robot.wrist.setPosition(0.2);
+//        robot.elbow.setPosition(1);
+
+                sleep(1000);
+
+
+                //// park on line
+                robot.forward(0.5);
+                sleep(2400);
+                robot.stop();
+                sleep(50);
+
+                robot.stop();
+                sleep(3000);
+
+//            robot.forwardByEncoder(0.25, 4400);
+//            Thread.sleep(100);
+
+
+                telemetry.update();
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
             robot.forward(0.5);
