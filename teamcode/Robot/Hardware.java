@@ -4,6 +4,8 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorImpl;
+import com.qualcomm.robotcore.hardware.DcMotorImplEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -76,13 +78,14 @@ public class Hardware {
     public DcMotor br = null;
     public DcMotorEx shooter = null;
     public DcMotor intake = null;
-    public DcMotor elevator = null;
+    public DcMotorImplEx elevator = null;
 
     public Servo hand = null;
     public Servo wrist = null;
     public Servo elbow = null;
     public Servo shoulder = null;
     public Servo flick = null;
+    public Servo lightsaber = null;
 
 
     BNO055IMU imu;
@@ -117,7 +120,7 @@ public class Hardware {
         br = hwMap.get(DcMotor.class, "br");
         shooter = hwMap.get(DcMotorEx.class, "shooter");
         intake = hwMap.get(DcMotor.class, "intake");
-        elevator = hwMap.get(DcMotor.class, "elevator");
+        elevator = hwMap.get(DcMotorImplEx.class, "elevator");
 
         fl.setDirection(DcMotor.Direction.REVERSE);//FORWARD
         bl.setDirection(DcMotor.Direction.REVERSE);//REVERSE
@@ -125,13 +128,13 @@ public class Hardware {
         br.setDirection(DcMotor.Direction.FORWARD);
         shooter.setDirection(DcMotorEx.Direction.REVERSE);
         intake.setDirection(DcMotor.Direction.FORWARD);
-        elevator.setDirection(DcMotor.Direction.FORWARD);
+        elevator.setDirection(DcMotorImplEx.Direction.FORWARD);
 
         fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // shooter.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
@@ -153,7 +156,7 @@ public class Hardware {
         br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        elevator.setMode(DcMotorImplEx.RunMode.RUN_WITHOUT_ENCODER);
 
 
         hand = hwMap.get(Servo.class, "hand");
@@ -161,12 +164,15 @@ public class Hardware {
         elbow = hwMap.get(Servo.class, "elbow");
         shoulder = hwMap.get(Servo.class, "shoulder");
         flick = hwMap.get(Servo.class, "flick");
+        lightsaber = hwMap.get(Servo.class, "lightsaber");
+
 
         hand.setPosition(0);
         wrist.setPosition(0.5);// was 0.5
         elbow.setPosition(1);/// was 0.9
         shoulder.setPosition(0);
         flick.setPosition(0);
+        lightsaber.setPosition(0);
 
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
