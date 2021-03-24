@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -21,10 +23,13 @@ public class Tele_Op extends LinearOpMode {
     Hardware robot = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
 
+
     @Override
     public void runOpMode() {
 
+
         robot.init(hardwareMap);
+        // robot.reset();
         sleep(500);
 
         int superPowerReduction = 1;
@@ -53,11 +58,11 @@ public class Tele_Op extends LinearOpMode {
         waitForStart();
         runtime.reset();
         robot.resetAngle();
-        robot.reset();
+
         while (opModeIsActive()) {
 
 
-            //////////////////////////// DRIVER 1 ------------------ DRIVER 1 //////////////////////
+            ////////////////////////// DRIVER 1 ------------------ DRIVER 1 //////////////////////
 
 
             if (gamepad1.dpad_up) {
@@ -102,7 +107,6 @@ public class Tele_Op extends LinearOpMode {
             }
 
 
-
             //////////////Flick//////////////////////
             if (gamepad2.right_bumper) {
                 robot.flick.setPosition(0.38);//in
@@ -117,59 +121,75 @@ public class Tele_Op extends LinearOpMode {
 //            }
 
 
-              ///////////////////////////Intake//////////////////////////////
+            ///////////////////////////Intake//////////////////////////////
 
-//            if (gamepad2.right_bumper) {
-//                if (intakeIsTrue) {
-//                    robot.intake.setPower(1);
-//                    intakeIsTrue = false;
-//                } else {
-//                    robot.intake.setPower(-1);
-//                    intakeIsTrue = true;
-//                }
-//                sleep(200);
-//            }
+            if (gamepad1.right_bumper) {
+                if (intakeIsTrue) {
+                    robot.intake.setPower(-1);
+                    intakeIsTrue = false;
+                } else {
+                    robot.intake.setPower(1);
+                    intakeIsTrue = true;
+                }
+                sleep(200);
+            }
 
 //
 
             ////off and up
-            if (robot.elevator.getCurrentPosition() > 500) {
+            if (robot.elevator.getCurrentPosition() < -900) {  /////// no
                 robot.intake.setPower(0);
             }
 
             //// outake and mid
-            if (robot.elevator.getCurrentPosition() > 200 && robot.elevator.getCurrentPosition() < 500) {
-                robot.intake.setPower(1);
+            if (robot.elevator.getCurrentPosition() > -200 && robot.elevator.getCurrentPosition() < -900) {    //// no
+                robot.intake.setPower(-1);
             }
 
             //intake and down
-            if (robot.elevator.getCurrentPosition() < 200){
+            if (robot.elevator.getCurrentPosition() < -200) {  //// yes
+                robot.intake.setPower(1);
+            }
+
+            if (gamepad2.y) {
                 robot.intake.setPower(-1);
             }
 
 
-
-
-            //////////////// Elevator/////////////////
+            ////////////// Elevator/////////////////
 
 
 //            if (gamepad2.left_stick_y > Math.abs(0.2)) {
 //                    robot.elevator.setPower(gamepad2.left_stick_y);
 //            }
 
-            //   || robot.elevator.getCurrentPosition() == 760
-            if (gamepad2.left_stick_y > Math.abs(0.2)) {
-                while (robot.elevator.getCurrentPosition() < 755) {
+            //            || robot.elevator.getCurrentPosition() == 760
+
+
+//            if (gamepad2.left_stick_y > Math.abs(0.2)) {
+//                robot.elevator.setPower(gamepad2.left_stick_y);
+//            }
+//
+//            if (gamepad2.left_stick_y > Math.abs(0.2)) {
+//                while (robot.elevator.getCurrentPosition() > -1160) {
+//                    robot.elevator.setPower(gamepad2.left_stick_y);
+//                }
+//            } else {
+//                robot.elevator.setPower(0);
+//            }
+
+
+            if (gamepad2.left_stick_y > 0.2) {
+                while (robot.elevator.getCurrentPosition() > -1160) {
                     robot.elevator.setPower(gamepad2.left_stick_y);
                 }
-                robot.elevator.setPower(0.35);
             }
 
-            if (gamepad2.left_stick_y < Math.abs(0.2)) {
-                while (robot.elevator.getCurrentPosition() > 70) {
-                    robot.elevator.setPower(gamepad2.left_stick_y);
-                }
-                robot.elevator.setPower(0.35);
+
+            if (gamepad2.left_stick_y < -0.2) {
+                robot.elevator.setPower(gamepad2.left_stick_y);
+
+                //robot.elevator.setPower(0);
             }
 
 
