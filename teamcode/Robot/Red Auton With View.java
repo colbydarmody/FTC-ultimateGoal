@@ -34,10 +34,10 @@ import android.graphics.Color;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
-@Autonomous(name = "Red Auto Vuforia", group = "Auto")
+@Autonomous(name = "Red Auto", group = "Auto")
 
 
-public class Red_Auton_Vuforia extends LinearOpMode {
+public class Red_Auton extends LinearOpMode {
 
 
     public static final String TFOD_MODEL_ASSET = "UltimateGoal.tflite";
@@ -158,7 +158,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                     if (stack == 4) {
 
 
-                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                       // robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
 
 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -214,6 +214,9 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         sleep(1850);
                         robot.stop();
 
+                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                        sleep(1000);
+
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         //////////////////////////////////////////////   Flick   /////////////////////////////////////////////////////////////
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -252,7 +255,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.wrist.setPosition(0.65);
 
                         robot.forward(0.75);//////42
-                        sleep(1400);///162
+                        sleep(1250);///162
                         robot.stop();
 
 
@@ -274,7 +277,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                     if (stack == 1) {
 
 
-                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                        //robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         //////////////////////////////////////////////   start movement   ////////////////////////////////////////////////
@@ -328,6 +331,9 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.left(0.5);/////// 28
                         sleep(1500);
                         robot.stop();
+
+                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                        sleep(1500);
 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
@@ -385,7 +391,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
 
                     if (stack == 0)  {
 
-                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                        //robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         //////////////////////////////////////////////   start movement   ////////////////////////////////////////////////
@@ -411,8 +417,14 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.stop();
 
 
+                        robot.left(0.5);//////GET OFF WALL SO ARM DOESNT GO OUTSIDE WALL
+                        sleep(500);
+
                         ///////////DROP WOBBLE GOAL////////////////////////////////////
                         robot.shoulder.setPosition(0);//// move shoulder
+                        sleep(500);
+
+                        robot.right(0.5);//////GET OFF WALL SO ARM DOESNT GO OUTSIDE WALL
                         sleep(500);
 
                         robot.elbow.setPosition(0.7);
@@ -457,6 +469,8 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.left(0.5);/////// 28
                         sleep(1950);
                         robot.stop();
+
+
 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
