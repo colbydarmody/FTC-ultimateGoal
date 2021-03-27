@@ -211,11 +211,11 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.elevator.setPower(0);
 
                         robot.left(0.5);/////// 28
-                        sleep(1950);
+                        sleep(1850);
                         robot.stop();
 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
+                        //////////////////////////////////////////////   Flick   /////////////////////////////////////////////////////////////
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                         //////shoot 1
@@ -290,7 +290,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.stop();
 
                         robot.left(0.5);///square against wall
-                        sleep(200);
+                        sleep(400);
                         robot.stop();
 
                         robot.forward(0.75);//////54
@@ -305,7 +305,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.shooter.setVelocity(1650);
 
                         robot.right(0.5);///square against wall
-                        sleep(200);
+                        sleep(600);
                         robot.stop();
 
                         robot.elevator.setPower(-1);
@@ -326,7 +326,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.elevator.setPower(0);
 
                         robot.left(0.5);/////// 28
-                        sleep(1950);
+                        sleep(1500);
                         robot.stop();
 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -360,14 +360,14 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         robot.wrist.setPosition(0.65);
 
                         robot.left(0.5);///move to wobble position
-                        sleep(900);
+                        sleep(1400);
                         robot.stop();
                         sleep(50);
 
-                        robot.rotate(10, 0.3);
+                       // robot.rotate(-4, 0.3);//////////////// positive is left ///// negative is right
 
                         robot.forward(0.5);///move to wobble position
-                        sleep(1700);
+                        sleep(1300);
                         robot.stop();
 
                         robot.elbow.setPosition(0.2);
@@ -495,7 +495,6 @@ public class Red_Auton_Vuforia extends LinearOpMode {
 
                 telemetry.update();
             }
-
 
 
         }
