@@ -53,9 +53,9 @@ public class Tele_Op extends LinearOpMode {
                 elevatorPos.add(String.valueOf(robot.elevator.getCurrentPosition)); //add encoder value to the array
                 n++; //updating element # so we can reference it later
                 if (n > 0) { //we need at least two encoder values to calculate velocity, so this ensures that we have that
-                    elevatorSpeed.add(String.valueOf((elevatorPos.get(n)-elevatorPos.get(n-1))/(/*time*/)));
+                    elevatorSpeed.add(String.valueOf((Integer.valueOf(elevatorPos.get(n))-Integer.valueOf(elevatorPos.get(n-1)))/(/*time*/)));
                     if (n > 1) {
-                        elevatorAccel.add(String.valueOf((elevatorSpeed.get(n)-elevatorSpeed.get(n-1))/(/*time*/))))
+                        elevatorAccel.add(String.valueOf((Integer.valueOf(elevatorSpeed.get(n))-Integer.valueOf(elevatorSpeed.get(n-1)))/(/*time*/))))
                     }
                 }
                 //if (robot.elevator.getCurrentPosition() > -1175) {
