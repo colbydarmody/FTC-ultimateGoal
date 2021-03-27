@@ -122,7 +122,7 @@ public class Red_Auton_Vuforia extends LinearOpMode {
             waitForStart();
 
             int stack = 0;
-            if (opModeIsActive()) {
+
                 while (opModeIsActive()) {
                     if (tfod != null) {
                         // getUpdatedRecognitions() will return null if no new information is available since
@@ -153,125 +153,6 @@ public class Red_Auton_Vuforia extends LinearOpMode {
 
                     if (tfod != null) {
                         tfod.shutdown();
-                    }
-
-
-                    if (stack == 0) {
-                        robot.forward(0.5);
-                        sleep(1250);
-                        robot.stop();
-                    }
-
-                    if (stack == 1) {
-
-
-                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
-
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////   start movement   ////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-                        robot.right(0.5);/////// 24
-                        sleep(1900);
-                        robot.stop();
-
-                        robot.backward(0.3);///square against wall
-                        sleep(300);
-                        robot.stop();
-
-                        robot.left(0.5);///square against wall
-                        sleep(200);
-                        robot.stop();
-
-                        robot.forward(0.75);//////54
-                        sleep(1500);///was 1600
-                        robot.forward(0.25);
-                        sleep(200);
-                        robot.stop();
-
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////   Spin Up Shooter   ////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        robot.shooter.setVelocity(1650);
-
-                        robot.right(0.5);///square against wall
-                        sleep(200);
-                        robot.stop();
-
-                        robot.elevator.setPower(-1);
-                        boolean done = false;
-                        while (!done && opModeIsActive() && !isStopRequested()) {
-                            if (robot.elevator.getCurrentPosition() < -1175) {  ////////////////////////// change encoder value
-                                done = true;
-                            }
-                            telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
-                            telemetry.update();
-                        }
-                        robot.elevator.setPower(-0.2);
-                        robot.stop();
-
-
-                        robot.lightsaber.setPosition(0.65);
-                        sleep(300);
-                        robot.elevator.setPower(0);
-
-                        robot.left(0.5);/////// 28
-                        sleep(1950);
-                        robot.stop();
-
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                        //////shoot 1
-                        robot.flick.setPosition(0.33);//in
-                        sleep(300);
-                        robot.flick.setPosition(0);
-                        sleep(300);
-
-                        //////shoot 2
-                        robot.flick.setPosition(0.33);//in
-                        sleep(300);
-                        robot.flick.setPosition(0);
-                        sleep(300);
-
-                        //////shoot 3
-                        robot.shoulder.setPosition(0.25);
-                        robot.flick.setPosition(0.33);//in
-                        sleep(300);
-                        robot.flick.setPosition(0);
-                        sleep(300);
-
-                        robot.shooter.setVelocity(0);
-
-                        robot.shoulder.setPosition(0);//// move shoulder
-
-                        robot.elbow.setPosition(0.7);
-                        robot.wrist.setPosition(0.65);
-
-                        robot.left(0.5);///move to wobble position
-                        sleep(600);
-                        robot.stop();
-                        sleep(50);
-
-                        robot.rotate(-4, 0.3);
-
-                        robot.forward(0.5);///move to wobble position
-                        sleep(1300);
-                        robot.stop();
-
-                        robot.elbow.setPosition(0.2);
-                        sleep(1000);
-
-                        robot.hand.setPosition(1);
-
-                        robot.backward(0.75);///move to wobble position
-                        sleep(500);
-                        robot.stop();
-
-                        sleep(50000);
-
                     }
 
                     if (stack == 4) {
@@ -390,14 +271,236 @@ public class Red_Auton_Vuforia extends LinearOpMode {
                         telemetry.update();
                     }
 
+                    if (stack == 1) {
+
+
+                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////   start movement   ////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                        robot.right(0.5);/////// 24
+                        sleep(2000);
+                        robot.stop();
+
+                        robot.backward(0.3);///square against wall
+                        sleep(300);
+                        robot.stop();
+
+                        robot.left(0.5);///square against wall
+                        sleep(200);
+                        robot.stop();
+
+                        robot.forward(0.75);//////54
+                        sleep(1500);///was 1600
+                        robot.forward(0.25);
+                        sleep(200);
+                        robot.stop();
+
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////   Spin Up Shooter   ////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        robot.shooter.setVelocity(1650);
+
+                        robot.right(0.5);///square against wall
+                        sleep(200);
+                        robot.stop();
+
+                        robot.elevator.setPower(-1);
+                        boolean done = false;
+                        while (!done && opModeIsActive() && !isStopRequested()) {
+                            if (robot.elevator.getCurrentPosition() < -1175) {  ////////////////////////// change encoder value
+                                done = true;
+                            }
+                            telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
+                            telemetry.update();
+                        }
+                        robot.elevator.setPower(-0.2);
+                        robot.stop();
+
+
+                        robot.lightsaber.setPosition(0.65);
+                        sleep(300);
+                        robot.elevator.setPower(0);
+
+                        robot.left(0.5);/////// 28
+                        sleep(1950);
+                        robot.stop();
+
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        //////shoot 1
+                        robot.flick.setPosition(0.33);//in
+                        sleep(300);
+                        robot.flick.setPosition(0);
+                        sleep(300);
+
+                        //////shoot 2
+                        robot.flick.setPosition(0.33);//in
+                        sleep(300);
+                        robot.flick.setPosition(0);
+                        sleep(300);
+
+                        //////shoot 3
+                        robot.shoulder.setPosition(0.25);
+                        robot.flick.setPosition(0.33);//in
+                        sleep(300);
+                        robot.flick.setPosition(0);
+                        sleep(300);
+
+                        robot.shooter.setVelocity(0);
+
+                        robot.shoulder.setPosition(0);//// move shoulder
+
+                        robot.elbow.setPosition(0.7);
+                        robot.wrist.setPosition(0.65);
+
+                        robot.left(0.5);///move to wobble position
+                        sleep(900);
+                        robot.stop();
+                        sleep(50);
+
+                        robot.rotate(10, 0.3);
+
+                        robot.forward(0.5);///move to wobble position
+                        sleep(1700);
+                        robot.stop();
+
+                        robot.elbow.setPosition(0.2);
+                        sleep(1000);
+
+                        robot.hand.setPosition(1);
+
+                        robot.backward(0.75);///move to wobble position
+                        sleep(500);
+                        robot.stop();
+
+                        sleep(50000);
+
+                    }
+
+                    if (stack == 0)  {
+
+                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////   start movement   ////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                        robot.right(0.5);/////// 24
+                        sleep(2000);
+                        robot.stop();
+
+                        robot.backward(0.3);///square against wall
+                        sleep(300);
+                        robot.stop();
+
+                        robot.left(0.5);///square against wall
+                        sleep(200);
+                        robot.stop();
+
+                        robot.forward(0.75);//////54 MOVE UP TO LINE
+                        sleep(1500);///was 1600
+                        robot.forward(0.25);
+                        sleep(200);
+                        robot.stop();
+
+
+                        ///////////DROP WOBBLE GOAL////////////////////////////////////
+                        robot.shoulder.setPosition(0);//// move shoulder
+                        sleep(500);
+
+                        robot.elbow.setPosition(0.7);
+                        robot.wrist.setPosition(0.65);
+
+                        sleep(500);
+
+                        robot.elbow.setPosition(0.2);
+                        sleep(500);
+
+                        robot.hand.setPosition(1);
+
+
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////   Spin Up Shooter   ////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        robot.shooter.setVelocity(1650);
+
+                        robot.right(0.5);///square against wall
+                        sleep(200);
+                        robot.stop();
+
+                        robot.elevator.setPower(-1);
+                        boolean done = false;
+                        while (!done && opModeIsActive() && !isStopRequested()) {
+                            if (robot.elevator.getCurrentPosition() < -1175) {  ////////////////////////// change encoder value
+                                done = true;
+                            }
+                            telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
+                            telemetry.update();
+                        }
+                        robot.elevator.setPower(-0.2);
+                        robot.stop();
+
+
+                        robot.lightsaber.setPosition(0.65);
+                        sleep(300);
+                        robot.elevator.setPower(0);
+
+                        robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+
+                        robot.left(0.5);/////// 28
+                        sleep(1950);
+                        robot.stop();
+
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        //////shoot 1
+                        robot.flick.setPosition(0.33);//in
+                        sleep(300);
+                        robot.flick.setPosition(0);
+                        sleep(300);
+
+                        //////shoot 2
+                        robot.flick.setPosition(0.33);//in
+                        sleep(300);
+                        robot.flick.setPosition(0);
+                        sleep(300);
+
+                        //////shoot 3
+                        robot.shoulder.setPosition(0.25);
+                        robot.flick.setPosition(0.33);//in
+                        sleep(300);
+                        robot.flick.setPosition(0);
+                        sleep(300);
+
+                        robot.shooter.setVelocity(0);
+
+                        robot.forward(0.5);
+                        sleep(700);
+                        robot.stop();
+
+                        sleep(50000);
+
+
+                    }
                 }
+
+                telemetry.update();
             }
 
 
-            telemetry.update();
+
         }
 
-    }
+
 
 
     /**
