@@ -196,22 +196,28 @@ public class Tele_Op extends LinearOpMode {
                 robot.wobbleLaunch();
             }
 
-            ////////////// Elevator/////////////////
+             ////////////// Elevator/////////////////
             if (gamepad2.left_stick_y > 0.2) {
                 if (robot.elevator.getCurrentPosition() > -1175) {
                     robot.elevator.setPower(gamepad2.left_stick_y);
                 }
-
+                    if(robot.elevator.getCurrentPosition() < -1150) {
+                        robot.lightsaber.setPosition(0.65);
+                        robot.elevator.setPower(0);
+                    }
             }
+            
             if (gamepad2.left_stick_y < -0.2) {
                 if (robot.elevator.getCurrentPosition() < 0) {
                     robot.elevator.setPower(gamepad2.left_stick_y);
                 }
+                    if(robot.elevator.getCurrentPosition() > -1140){
+                        robot.lightsaber.setPosition(0);
+                    }
             }
             else {
                 robot.elevator.setPower(gamepad2.left_stick_y/3);
             }
-
 
             /////////////////// Shoulder //////////////////////////
             if (gamepad2.dpad_right) {
