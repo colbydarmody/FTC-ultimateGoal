@@ -385,7 +385,7 @@ public class Blue_Auton extends LinearOpMode {
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                    robot.right(0.5);/////// 24
+                    robot.left(0.5);/////// 24
                     sleep(2000);
                     robot.stop();
 
@@ -393,25 +393,18 @@ public class Blue_Auton extends LinearOpMode {
                     sleep(300);
                     robot.stop();
 
-                    robot.left(0.5);///square against wall
+                    robot.right(0.5);///get off wall
                     sleep(200);
                     robot.stop();
 
                     robot.forward(0.75);//////54 MOVE UP TO LINE
-                    sleep(1500);///was 1600
+                    sleep(1350);///was 1600
                     robot.forward(0.25);
                     sleep(200);
                     robot.stop();
 
-
-                    robot.left(0.5);//////GET OFF WALL SO ARM DOESNT GO OUTSIDE WALL
-                    sleep(500);
-
                     ///////////DROP WOBBLE GOAL////////////////////////////////////
                     robot.shoulder.setPosition(0);//// move shoulder
-                    sleep(500);
-
-                    robot.right(0.5);//////GET OFF WALL SO ARM DOESNT GO OUTSIDE WALL
                     sleep(500);
 
                     robot.elbow.setPosition(0.7);
@@ -423,15 +416,22 @@ public class Blue_Auton extends LinearOpMode {
                     sleep(500);
 
                     robot.hand.setPosition(1);
+                    sleep(500);
 
+                    robot.elbow.setPosition(0.7);
+                    sleep(500);
+
+                    robot.backward(0.5);///square against wall
+                    sleep(200);
+                    robot.stop();
 
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     //////////////////////////////////////////////   Spin Up Shooter   ////////////////////////////////////////////////
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     robot.shooter.setVelocity(1650);
 
-                    robot.right(0.5);///square against wall
-                    sleep(200);
+                    robot.left(0.5);///square against wall
+                    sleep(400);
                     robot.stop();
 
                     robot.elevator.setPower(-1);
@@ -453,8 +453,8 @@ public class Blue_Auton extends LinearOpMode {
 
                     robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
 
-                    robot.left(0.5);/////// 28
-                    sleep(1950);
+                    robot.right(0.5);/////// 28
+                    sleep(2500);
                     robot.stop();
 
 
