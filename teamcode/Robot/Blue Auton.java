@@ -166,7 +166,7 @@ public class Blue_Auton extends LinearOpMode {
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                    robot.right(0.5);/////// 24 to the wall
+                    robot.left(0.5);/////// 24 to the wall
                     sleep(1900);
                     robot.stop();
 
@@ -174,12 +174,12 @@ public class Blue_Auton extends LinearOpMode {
                     sleep(300);
                     robot.stop();
 
-                    robot.left(0.5);///square against wall
+                    robot.right(0.5);///get off wall
                     sleep(200);
                     robot.stop();
 
                     robot.forward(0.75);//////54 up to line to shoot
-                    sleep(1500);///was 1600
+                    sleep(1350);///was 1600
                     robot.forward(0.25);
                     sleep(200);
                     robot.stop();
@@ -189,8 +189,8 @@ public class Blue_Auton extends LinearOpMode {
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     robot.shooter.setVelocity(1650);
 
-                    robot.right(0.5);///square against wall
-                    sleep(200);
+                    robot.left(0.5);///square against wall
+                    sleep(400);
                     robot.stop();
 
                     robot.elevator.setPower(-1);// make elevator go up
@@ -210,9 +210,11 @@ public class Blue_Auton extends LinearOpMode {
                     sleep(300);
                     robot.elevator.setPower(0);
 
-                    robot.left(0.5);/////// 28 to get in line with the rings
-                    sleep(1850);
+                    robot.right(0.5);/////// 43 to get in line with the rings
+                    sleep(3000);
                     robot.stop();
+
+                    //robot.rotate(-7, 0.3);//////////////// positive is left ///// negative is right
 
                     robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
                     sleep(1000);
@@ -234,27 +236,28 @@ public class Blue_Auton extends LinearOpMode {
 
                     robot.shoulder.setPosition(0);//// move shoulder
 
-                    robot.right(0.5);/////// 28 BACK TO WALL
-                    sleep(2150);
+                    robot.left(0.5);/////// 28 BACK TO WALL
+                    sleep(3150);
                     robot.stop();
 
-                    robot.left(0.5);/////// GET OFF WALL
-                    sleep(100);
+                    robot.right(0.5);/////// GET OFF WALL
+                    sleep(150);
                     robot.stop();
 
-                    robot.elbow.setPosition(0.7);
+                    robot.elbow.setPosition(0.4);
                     robot.wrist.setPosition(0.65);
+                    sleep(500);
 
                     robot.forward(0.75);//////42
-                    sleep(1250);///162
+                    sleep(1500);///162
                     robot.stop();
 
 
                     robot.elbow.setPosition(0.2);
-                    sleep(500);
+
 
                     robot.hand.setPosition(1);
-                    sleep(500);
+                    sleep(1000);
 
                     robot.backward(0.75);//////42
                     sleep(1000);///162
@@ -276,7 +279,7 @@ public class Blue_Auton extends LinearOpMode {
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                    robot.right(0.5);/////// 24
+                    robot.left(0.5);/////// 24
                     sleep(2000);
                     robot.stop();
 
@@ -284,12 +287,12 @@ public class Blue_Auton extends LinearOpMode {
                     sleep(300);
                     robot.stop();
 
-                    robot.left(0.5);///square against wall
-                    sleep(400);
+                    robot.right(0.5);///get off wall against wall
+                    sleep(200);
                     robot.stop();
 
                     robot.forward(0.75);//////54
-                    sleep(1500);///was 1600
+                    sleep(1350);///was 1600
                     robot.forward(0.25);
                     sleep(200);
                     robot.stop();
@@ -299,7 +302,7 @@ public class Blue_Auton extends LinearOpMode {
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     robot.shooter.setVelocity(1650);
 
-                    robot.right(0.5);///square against wall
+                    robot.left(0.5);///square against wall
                     sleep(600);
                     robot.stop();
 
@@ -320,9 +323,11 @@ public class Blue_Auton extends LinearOpMode {
                     sleep(300);
                     robot.elevator.setPower(0);
 
-                    robot.left(0.5);/////// 28
-                    sleep(1500);
+                    robot.right(0.5);/////// 28
+                    sleep(3000);
                     robot.stop();
+
+                   // robot.rotate(-7, 0.3);//////////////// positive is left ///// negative is right
 
                     robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
                     sleep(1500);
@@ -347,15 +352,15 @@ public class Blue_Auton extends LinearOpMode {
                     robot.elbow.setPosition(0.7);
                     robot.wrist.setPosition(0.65);
 
-                    robot.left(0.5);///move to wobble position
-                    sleep(1400);
+                    robot.left(0.5);///move to wobble position left
+                    sleep(1100);
                     robot.stop();
                     sleep(50);
 
-                    // robot.rotate(-4, 0.3);//////////////// positive is left ///// negative is right
 
-                    robot.forward(0.5);///move to wobble position
-                    sleep(1300);
+
+                    robot.forward(0.5);///move to wobble position forward
+                    sleep(1250);
                     robot.stop();
 
                     robot.elbow.setPosition(0.2);
