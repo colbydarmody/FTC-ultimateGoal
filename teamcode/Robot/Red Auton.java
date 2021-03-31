@@ -284,12 +284,12 @@ public class Red_Auton extends LinearOpMode {
                     sleep(300);
                     robot.stop();
 
-                    robot.left(0.5);///square against wall
-                    sleep(400);
+                    robot.left(0.5);///get off wall
+                    sleep(200);
                     robot.stop();
 
                     robot.forward(0.75);//////54
-                    sleep(1500);///was 1600
+                    sleep(1350);///was 1600
                     robot.forward(0.25);
                     sleep(200);
                     robot.stop();
@@ -348,14 +348,14 @@ public class Red_Auton extends LinearOpMode {
                     robot.wrist.setPosition(0.65);
 
                     robot.left(0.5);///move to wobble position
-                    sleep(1400);
+                    sleep(1200);
                     robot.stop();
                     sleep(50);
 
                     // robot.rotate(-4, 0.3);//////////////// positive is left ///// negative is right
 
                     robot.forward(0.5);///move to wobble position
-                    sleep(1300);
+                    sleep(1100);
                     robot.stop();
 
                     robot.elbow.setPosition(0.2);
@@ -364,8 +364,79 @@ public class Red_Auton extends LinearOpMode {
                     robot.hand.setPosition(1);
 
                     robot.backward(0.75);///move to wobble position
-                    sleep(500);
+                    sleep(450);
                     robot.stop();
+
+
+
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////// TEST///////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    robot.lightsaber.setPosition(0);
+                    sleep(300);
+
+                    boolean down = false;
+                    robot.elevator.setPower(1);// make elevator go down
+                    while (!down && opModeIsActive() && !isStopRequested()) {
+                        if (robot.elevator.getCurrentPosition() > -20) {  ////////////////////////// change encoder value
+                            down = true;
+                        }
+                        telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
+                        telemetry.update();
+                    }
+                    robot.elevator.setPower(0.2);
+                    robot.stop();
+
+                    robot.elevator.setPower(0);
+
+                    /// intake on
+                    robot.intake.setPower(-1);
+
+                    ///// back 29 in
+                    robot.backward(0.5);///move to ring pickup
+                    sleep(2117);
+                    robot.stop();
+
+                    //////sleep for intake
+                    sleep(500);
+
+                    /// intake off
+                    robot.intake.setPower(-1);
+
+                    // elv up
+                    robot.elevator.setPower(-1);
+                    done = false;
+                    while (!done && opModeIsActive() && !isStopRequested()) {
+                        if (robot.elevator.getCurrentPosition() < -1175) {  ////////////////////////// change encoder value
+                            done = true;
+                        }
+                        telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
+                        telemetry.update();
+                    }
+                    robot.elevator.setPower(-0.2);
+                    robot.stop();
+
+
+                    robot.lightsaber.setPosition(0.65);
+                    sleep(300);
+                    robot.elevator.setPower(0);
+
+                    /// arm back
+                    robot.shoulder.setPosition(0.66);
+
+                    // left
+                    robot.left(0.5);///move to wobble  pickup
+                    sleep(900);
+                    robot.stop();
+
+
+                    //// back 19 for wobble
+                    robot.backward(0.5);///move to wobble  pickup
+                    sleep(1387);
+                    robot.stop();
+
+
 
                     sleep(50000);
 
@@ -393,21 +464,10 @@ public class Red_Auton extends LinearOpMode {
                     robot.stop();
 
                     robot.forward(0.75);//////54 MOVE UP TO LINE
-                    sleep(1500);///was 1600
+                    sleep(1350);///was 1600
                     robot.forward(0.25);
                     sleep(200);
                     robot.stop();
-
-
-                    robot.left(0.5);//////GET OFF WALL SO ARM DOESNT GO OUTSIDE WALL
-                    sleep(500);
-
-                    ///////////DROP WOBBLE GOAL////////////////////////////////////
-                    robot.shoulder.setPosition(0);//// move shoulder
-                    sleep(500);
-
-                    robot.right(0.5);//////GET OFF WALL SO ARM DOESNT GO OUTSIDE WALL
-                    sleep(500);
 
                     robot.elbow.setPosition(0.7);
                     robot.wrist.setPosition(0.65);
@@ -418,6 +478,7 @@ public class Red_Auton extends LinearOpMode {
                     sleep(500);
 
                     robot.hand.setPosition(1);
+                    sleep(500);
 
 
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -426,7 +487,7 @@ public class Red_Auton extends LinearOpMode {
                     robot.shooter.setVelocity(1650);
 
                     robot.right(0.5);///square against wall
-                    sleep(200);
+                    sleep(600);
                     robot.stop();
 
                     robot.elevator.setPower(-1);
@@ -446,12 +507,15 @@ public class Red_Auton extends LinearOpMode {
                     sleep(300);
                     robot.elevator.setPower(0);
 
-                    robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                  //  robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
 
                     robot.left(0.5);/////// 28
-                    sleep(1950);
+                    sleep(1500);
                     robot.stop();
 
+
+                    robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                    sleep(1500);
 
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
