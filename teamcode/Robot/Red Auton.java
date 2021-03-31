@@ -179,7 +179,7 @@ public class Red_Auton extends LinearOpMode {
                     robot.stop();
 
                     robot.forward(0.75);//////54 up to line to shoot
-                    sleep(1500);///was 1600
+                    sleep(1350);///was 1600
                     robot.forward(0.25);
                     sleep(200);
                     robot.stop();
@@ -190,7 +190,7 @@ public class Red_Auton extends LinearOpMode {
                     robot.shooter.setVelocity(1650);
 
                     robot.right(0.5);///square against wall
-                    sleep(200);
+                    sleep(600);
                     robot.stop();
 
                     robot.elevator.setPower(-1);// make elevator go up
@@ -211,7 +211,7 @@ public class Red_Auton extends LinearOpMode {
                     robot.elevator.setPower(0);
 
                     robot.left(0.5);/////// 28 to get in line with the rings
-                    sleep(1850);
+                    sleep(1550);
                     robot.stop();
 
                     robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
@@ -523,4 +523,3 @@ public class Red_Auton extends LinearOpMode {
     }
 
 }
-
