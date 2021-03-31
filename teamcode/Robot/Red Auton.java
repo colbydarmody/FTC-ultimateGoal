@@ -369,72 +369,72 @@ public class Red_Auton extends LinearOpMode {
 
 
 
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////
-                    //////////////////////////////////// TEST///////////////////////////////////////////////////////////
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                    robot.lightsaber.setPosition(0);
-                    sleep(300);
-
-                    boolean down = false;
-                    robot.elevator.setPower(1);// make elevator go down
-                    while (!down && opModeIsActive() && !isStopRequested()) {
-                        if (robot.elevator.getCurrentPosition() > -20) {  ////////////////////////// change encoder value
-                            down = true;
-                        }
-                        telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
-                        telemetry.update();
-                    }
-                    robot.elevator.setPower(0.2);
-                    robot.stop();
-
-                    robot.elevator.setPower(0);
-
-                    /// intake on
-                    robot.intake.setPower(-1);
-
-                    ///// back 29 in
-                    robot.backward(0.5);///move to ring pickup
-                    sleep(2117);
-                    robot.stop();
-
-                    //////sleep for intake
-                    sleep(500);
-
-                    /// intake off
-                    robot.intake.setPower(-1);
-
-                    // elv up
-                    robot.elevator.setPower(-1);
-                    done = false;
-                    while (!done && opModeIsActive() && !isStopRequested()) {
-                        if (robot.elevator.getCurrentPosition() < -1175) {  ////////////////////////// change encoder value
-                            done = true;
-                        }
-                        telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
-                        telemetry.update();
-                    }
-                    robot.elevator.setPower(-0.2);
-                    robot.stop();
-
-
-                    robot.lightsaber.setPosition(0.65);
-                    sleep(300);
-                    robot.elevator.setPower(0);
-
-                    /// arm back
-                    robot.shoulder.setPosition(0.66);
-
-                    // left
-                    robot.left(0.5);///move to wobble  pickup
-                    sleep(900);
-                    robot.stop();
-
-
-                    //// back 19 for wobble
-                    robot.backward(0.5);///move to wobble  pickup
-                    sleep(1387);
-                    robot.stop();
+//                    ////////////////////////////////////////////////////////////////////////////////////////////////////
+//                    //////////////////////////////////// TEST///////////////////////////////////////////////////////////
+//                    //////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                    robot.lightsaber.setPosition(0);
+//                    sleep(300);
+//
+//                    boolean down = false;
+//                    robot.elevator.setPower(1);// make elevator go down
+//                    while (!down && opModeIsActive() && !isStopRequested()) {
+//                        if (robot.elevator.getCurrentPosition() > -20) {  ////////////////////////// change encoder value
+//                            down = true;
+//                        }
+//                        telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
+//                        telemetry.update();
+//                    }
+//                    robot.elevator.setPower(0.2);
+//                    robot.stop();
+//
+//                    robot.elevator.setPower(0);
+//
+//                    /// intake on
+//                    robot.intake.setPower(-1);
+//
+//                    ///// back 29 in
+//                    robot.backward(0.5);///move to ring pickup
+//                    sleep(2117);
+//                    robot.stop();
+//
+//                    //////sleep for intake
+//                    sleep(500);
+//
+//                    /// intake off
+//                    robot.intake.setPower(-1);
+//
+//                    // elv up
+//                    robot.elevator.setPower(-1);
+//                    done = false;
+//                    while (!done && opModeIsActive() && !isStopRequested()) {
+//                        if (robot.elevator.getCurrentPosition() < -1175) {  ////////////////////////// change encoder value
+//                            done = true;
+//                        }
+//                        telemetry.addData("Encoder Value is: ", robot.elevator.getCurrentPosition());
+//                        telemetry.update();
+//                    }
+//                    robot.elevator.setPower(-0.2);
+//                    robot.stop();
+//
+//
+//                    robot.lightsaber.setPosition(0.65);
+//                    sleep(300);
+//                    robot.elevator.setPower(0);
+//
+//                    /// arm back
+//                    robot.shoulder.setPosition(0.66);
+//
+//                    // left
+//                    robot.left(0.5);///move to wobble  pickup
+//                    sleep(900);
+//                    robot.stop();
+//
+//
+//                    //// back 19 for wobble
+//                    robot.backward(0.5);///move to wobble  pickup
+//                    sleep(1387);
+//                    robot.stop();
 
 
 
