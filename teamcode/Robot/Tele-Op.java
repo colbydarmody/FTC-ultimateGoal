@@ -81,7 +81,7 @@ public class Tele_Op extends LinearOpMode {
              * DRIVER 1 ------------------ DRIVER 1
              */
 
-
+            //////////////////////////////intake//////////////////////////////////////////
             if (gamepad1.y && robot.elevator.getCurrentPosition() > -200) {
                 if (intakeIsTrue) {
                     robot.intake.setPower(-1);
@@ -93,18 +93,26 @@ public class Tele_Op extends LinearOpMode {
                 sleep(200);
             }
 
+            double speed = 1;
+
+            if (gamepad1.b){
+                speed = 0.5;
+            }else {
+                speed = 1;
+            }
+
             if (gamepad1.dpad_up) {
-                robot.forward(.25); // Need to increase due to the immense weight of the robot
+                robot.forward(speed); // Need to increase due to the immense weight of the robot
             } else if (gamepad1.dpad_down) {
-                robot.backward(.25);
+                robot.backward(speed);
             } else if (gamepad1.dpad_left) {
-                robot.left(.25);
+                robot.left(speed);
             } else if (gamepad1.dpad_right) {
-                robot.right(.25);
+                robot.right(speed);
             } else if (gamepad1.left_bumper) {
-                robot.spinRight(0.25);
+                robot.spinLeft(speed);
             } else if (gamepad1.right_bumper) {
-                robot.spinLeft(0.25);
+                robot.spinRight(speed);
             } else if (gamepad1.y) {
                 robot.fl.setPower(-gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 + gamepad1.right_stick_x / 2);
                 robot.fr.setPower(gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 - gamepad1.right_stick_x / 2);
@@ -116,6 +124,19 @@ public class Tele_Op extends LinearOpMode {
                 robot.bl.setPower(gamepad1.left_stick_x / 1.33333 - gamepad1.left_stick_y / 1.33333 + gamepad1.right_stick_x / 1.33333);
                 robot.br.setPower(-gamepad1.left_stick_x / 1.33333 - gamepad1.left_stick_y / 1.33333 - gamepad1.right_stick_x / 1.33333);
             }
+
+//             else if(gamepad1.y){
+//                robot.fl.setPower(gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
+//                robot.fr.setPower(-gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
+//                robot.bl.setPower(-gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
+//                robot.br.setPower(gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
+//            }else{
+//                robot.fl.setPower(gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 + gamepad1.right_stick_x/1.33333);
+//                robot.fr.setPower(-gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 - gamepad1.right_stick_x/1.33333);
+//                robot.bl.setPower(-gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 + gamepad1.right_stick_x/1.33333);
+//                robot.br.setPower(gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 - gamepad1.right_stick_x/1.33333);
+
+
 
 //            telemetry.addData("Shooter Position:", robot.shooter.getCurrentPosition());
             //       telemetry.addData("Shooter Velocity:", robot.shooter.getVelocity());
@@ -137,16 +158,6 @@ public class Tele_Op extends LinearOpMode {
             } else {
                 robot.shooter.setVelocity(0);
             }
-
-
-//            if (gamepad2.right_trigger > 0.05) {
-//                robot.shooter.setVelocity(1650);//// was 1650
-//            }
-//            if (gamepad2.right_trigger > 0.05 && gamepad1.a) {
-//                robot.shooter.setVelocity(1500);//// was 1650
-//            } else {
-//                robot.shooter.setVelocity(0);
-//            }
 
 
             //////////////Flick//////////////////////
@@ -222,16 +233,16 @@ public class Tele_Op extends LinearOpMode {
             ///////////////////////////////// get ready to grab ////////////////////////////
             if (gamepad2.a) {
                 robot.shoulder.setPosition(0);
-                robot.elbow.setPosition(0.2);
-                robot.wrist.setPosition(0.65);
-                robot.hand.setPosition(1);
+                robot.elbow.setPosition(0.1);// was 0.2
+                robot.wrist.setPosition(0.8);
+                robot.hand.setPosition(0);
 
             }
 
             /////////////////////////////// Grab   or open/close //////////////////////////
             if (gamepad2.b) {
                 if (clampIsTrue) {
-                    robot.hand.setPosition(-1);
+                    robot.hand.setPosition(0);
                     clampIsTrue = false;
                 } else {
                     robot.hand.setPosition(1);
@@ -242,10 +253,11 @@ public class Tele_Op extends LinearOpMode {
 
             ///////////////////////////////// store after pickign up ////////////////////////////  needs work
             if (gamepad2.y) {
-
-                robot.hand.setPosition(-1);
-                robot.wrist.setPosition(0.5);// was 0.5
+                robot.wrist.setPosition(1);// was 0.5
+                sleep(100);
                 robot.elbow.setPosition(0.93);/// was 0.9
+                robot.hand.setPosition(-1);
+
                 robot.shoulder.setPosition(0);
 
             }
@@ -255,7 +267,7 @@ public class Tele_Op extends LinearOpMode {
                 robot.shoulder.setPosition(0.66);
                 robot.elbow.setPosition(0.4);
                 robot.wrist.setPosition(0.65);
-                robot.hand.setPosition(-1);
+                robot.hand.setPosition(0);
 
             }
 
