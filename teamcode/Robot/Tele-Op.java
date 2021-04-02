@@ -251,12 +251,12 @@ public class Tele_Op extends LinearOpMode {
                 sleep(200);  ///  maybe
             }
 
-            ///////////////////////////////// store after pickign up ////////////////////////////  needs work
+            ///////////////////////////////// store after picking up ////////////////////////////  0 is close on arm
             if (gamepad2.y) {
-                robot.wrist.setPosition(1);// was 0.5
+                robot.wrist.setPosition(0.75 );// was 0.65
                 sleep(100);
-                robot.elbow.setPosition(0.93);/// was 0.9
-                robot.hand.setPosition(-1);
+                robot.elbow.setPosition(0.85);/// was 0.9
+                robot.hand.setPosition(0);
 
                 robot.shoulder.setPosition(0);
 
