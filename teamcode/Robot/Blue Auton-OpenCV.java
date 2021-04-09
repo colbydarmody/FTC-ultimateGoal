@@ -110,7 +110,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 sleep(200);
                 robot.stop();
 
-                robot.elbow.setPosition(0.4);//// get out of the way
+                robot.elbow.setPosition(0.7);//// get out of the way
                 sleep(500);
 
 
@@ -147,7 +147,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 //robot.rotate(-7, 0.3);//////////////// positive is left ///// negative is right
 
                 //robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
-                robot.elbow.setPosition(0.4);//// get out of the way
+                robot.elbow.setPosition(0.7);//// get out of the way
                 sleep(1000);
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,7 +175,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 sleep(150);
                 robot.stop();
 
-                robot.elbow.setPosition(0.4);
+                robot.elbow.setPosition(0.7);
                 //robot.wrist.setPosition(0.65);
                 sleep(500);
 
@@ -228,7 +228,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 sleep(200);
                 robot.stop();
 
-                robot.elbow.setPosition(0.4);//// get out of the way
+                robot.elbow.setPosition(0.7);//// get out of the way
                 sleep(500);
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -263,7 +263,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
 
                 // robot.rotate(-7, 0.3);//////////////// positive is left ///// negative is right
 
-                robot.elbow.setPosition(0.4);//// get out of the way
+                robot.elbow.setPosition(0.7);//// get out of the way
 
                 sleep(1000);
 
@@ -284,7 +284,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
 
                 //robot.shoulder.setPosition(0);//// move shoulder
 
-                robot.elbow.setPosition(0.4);
+                robot.elbow.setPosition(0.7);
               //  robot.wrist.setPosition(0.65);
 
                 robot.left(0.5);///move to wobble position left
@@ -297,7 +297,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 sleep(1250);
                 robot.stop();
 
-                robot.elbow.setPosition(0.4);//// get out of the way
+                robot.elbow.setPosition(0.7);//// get out of the way
                 sleep(1000);
 
                 robot.hand.setPosition(1);
@@ -342,12 +342,12 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 // robot.shoulder.setPosition(0);//// move shoulder
                 sleep(500);
 
-                robot.elbow.setPosition(0.4);
+                robot.elbow.setPosition(0.7);
                //robot.wrist.setPosition(0.65);
 
                 sleep(500);
 
-                robot.elbow.setPosition(0.4);
+                robot.elbow.setPosition(0.7);
                 sleep(500);
 
                 robot.hand.setPosition(1);
