@@ -83,7 +83,7 @@ public class Hardware {
     public Servo hand = null;
     public Servo wrist = null;
     public Servo elbow = null;
-    public Servo shoulder = null;
+   // public Servo shoulder = null;
     public Servo flick = null;
     public Servo lightsaber = null;
 
@@ -162,15 +162,15 @@ public class Hardware {
         hand = hwMap.get(Servo.class, "hand");
         wrist = hwMap.get(Servo.class, "wrist");
         elbow = hwMap.get(Servo.class, "elbow");
-        shoulder = hwMap.get(Servo.class, "shoulder");
+       // shoulder = hwMap.get(Servo.class, "shoulder");
         flick = hwMap.get(Servo.class, "flick");
         lightsaber = hwMap.get(Servo.class, "lightsaber");
 
 
         hand.setPosition(0);
-        wrist.setPosition(0.5);// was 0.5
-        elbow.setPosition(1);/// was 0.9
-        shoulder.setPosition(0);
+        wrist.setPosition(0.3);// was 0.5 is  middle
+        elbow.setPosition(0);/// 0.2 is elbow up ///// 1 is good grab position
+       // shoulder.setPosition(0);
         flick.setPosition(0);
         lightsaber.setPosition(0);
 
@@ -454,7 +454,7 @@ public class Hardware {
         hand.setPosition(0);
         wrist.setPosition(0.3);
         elbow.setPosition(0.9);
-        shoulder.setPosition(0.65);
+       // shoulder.setPosition(0.65);
     }
 
     //Method for "resting" Wobble arm position
@@ -463,7 +463,7 @@ public class Hardware {
         hand.setPosition(0);
         wrist.setPosition(0.5);
         elbow.setPosition(1);
-        shoulder.setPosition(0);
+       // shoulder.setPosition(0);
     }
 
     //Method for dropping wobble goal
@@ -502,7 +502,7 @@ public class Hardware {
         //Move all components into lifting position
         wrist.setPosition(0.5);
         elbow.setPosition(1);
-        shoulder.setPosition(0);
+       // shoulder.setPosition(0);
     }
 
     // Method for not moving
