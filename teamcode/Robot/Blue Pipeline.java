@@ -18,8 +18,14 @@ public class BluePipeline extends OpenCvPipeline
     /*
      * Some color constants
      */
+
     static final Scalar BLUE = new Scalar(0, 0, 255);
     static final Scalar GREEN = new Scalar(0, 255, 0);
+    static final Scalar YEllOW = new Scalar(255, 255, 0);
+    static final Scalar RED = new Scalar(255, 0, 0);
+    static final Scalar PINK = new Scalar(255, 0, 255);
+    static final Scalar BLACK = new Scalar(0, 0, 0);
+
 
     /*
      * The core values which define the location and size of the sample regions
@@ -89,7 +95,7 @@ public class BluePipeline extends OpenCvPipeline
                 input, // Buffer to draw on
                 region1_pointA, // First point which defines the rectangle
                 region1_pointB, // Second point which defines the rectangle
-                GREEN, // The color the rectangle is drawn in
+                YEllOW, // The color the rectangle is drawn in
                 3); // Thickness of  rectangle lines
 
       // position = Randomization.NONE; // Record our analysis
