@@ -111,6 +111,9 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 sleep(200);
                 robot.stop();
 
+                robot.elbow.setPosition(0.7);//// get out of the way
+                sleep(500);
+
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////   Spin Up Shooter   ////////////////////////////////////////////////
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,8 +144,8 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 sleep(1550);
                 robot.stop();
 
-                robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
-                sleep(1000);
+                robot.elbow.setPosition(0.7);//// get out of the way
+                sleep(500);
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////   Flick   /////////////////////////////////////////////////////////////
@@ -170,14 +173,14 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 robot.stop();
 
                 robot.elbow.setPosition(0.7);
-                robot.wrist.setPosition(0.65);
+               // robot.wrist.setPosition(0.65);
 
                 robot.forward(0.75);//////42
                 sleep(1250);///162
                 robot.stop();
 
 
-                robot.elbow.setPosition(0.2);
+                robot.elbow.setPosition(0.7);
                 sleep(500);
 
                 robot.hand.setPosition(1);
@@ -220,6 +223,9 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 robot.forward(0.25);
                 sleep(200);
                 robot.stop();
+
+                robot.elbow.setPosition(0.7);//// get out of the way
+                sleep(500);
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////   Spin Up Shooter   ////////////////////////////////////////////////
@@ -272,7 +278,7 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 //robot.shoulder.setPosition(0);//// move shoulder
 
                 robot.elbow.setPosition(0.7);
-                robot.wrist.setPosition(0.65);
+               // robot.wrist.setPosition(0.65);
 
                 robot.left(0.5);///move to wobble position
                 sleep(1200);
@@ -285,10 +291,11 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 sleep(1100);
                 robot.stop();
 
-                robot.elbow.setPosition(0.2);
-                sleep(1000);
+                robot.elbow.setPosition(0.7);
+
 
                 robot.hand.setPosition(1);
+                sleep(1000);
 
                 robot.backward(0.75);///move to wobble position
                 sleep(450);
@@ -398,15 +405,15 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 robot.stop();
 
                 robot.elbow.setPosition(0.7);
-                robot.wrist.setPosition(0.65);
+               // robot.wrist.setPosition(0.65);
 
                 sleep(500);
 
-                robot.elbow.setPosition(0.2);
-                sleep(500);
+                robot.elbow.setPosition(0.7);
+
 
                 robot.hand.setPosition(1);
-                sleep(500);
+                sleep(1000);
 
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
