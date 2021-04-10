@@ -39,8 +39,8 @@ public class RedPipeline extends OpenCvPipeline
     static final int REGION_HEIGHT = 100;//// wad 75
 
     // THESE ARE HOW MUCH ORANGE NEEDS TO BE IN FRAME TO BE CONSIDERED ONE OR FOUR RINGS
-    final int FOUR_RING_THRESHOLD = 37  ;/// was 70
-    final int ONE_RING_THRESHOLD = 20;///// 30
+    final int FOUR_RING_THRESHOLD = 37  ;/// was 37
+    final int ONE_RING_THRESHOLD = 22;///// 20
 
     Point region1_pointA = new Point(
             REGION1_TOPLEFT_ANCHOR_POINT.x,
