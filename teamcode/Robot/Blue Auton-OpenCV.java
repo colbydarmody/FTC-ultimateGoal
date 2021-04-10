@@ -105,7 +105,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 robot.stop();
 
                 robot.forward(0.75);//////54 up to line to shoot
-                sleep(1350);///was 1600
+                sleep(1250);///was 1600
                 robot.forward(0.25);
                 sleep(200);
                 robot.stop();
@@ -120,7 +120,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 robot.shooter.setVelocity(1650);
 
                 robot.left(0.5);///square against wall
-                sleep(400);
+                sleep(600);
                 robot.stop();
 
                 robot.elevator.setPower(-1);// make elevator go up
@@ -141,14 +141,14 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 robot.elevator.setPower(0);
 
                 robot.right(0.5);/////// 43 to get in line with the rings
-                sleep(3000);
+                sleep(2750);// was 3000
                 robot.stop();
 
                 //robot.rotate(-7, 0.3);//////////////// positive is left ///// negative is right
 
                 //robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
                 robot.elbow.setPosition(0.7);//// get out of the way
-                sleep(1000);
+                sleep(1500);
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////   Flick   /////////////////////////////////////////////////////////////
@@ -168,7 +168,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 //robot.shoulder.setPosition(0);//// move shoulder
 
                 robot.left(0.5);/////// 28 BACK TO WALL
-                sleep(3150);
+                sleep(3000);
                 robot.stop();
 
                 robot.right(0.5);/////// GET OFF WALL
@@ -265,7 +265,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
 
                 robot.elbow.setPosition(0.7);//// get out of the way
 
-                sleep(1000);
+                sleep(500);
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
@@ -276,6 +276,8 @@ public class Blue_AutonOpenCV extends LinearOpMode {
 
                 //////shoot 2
                 flick();
+
+                sleep(200);
 
                 //////shoot 3
                 flick();
@@ -294,7 +296,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
 
 
                 robot.forward(0.5);///move to wobble position forward
-                sleep(1250);
+                sleep(1100);
                 robot.stop();
 
                 robot.elbow.setPosition(0.7);//// get out of the way
@@ -333,7 +335,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 robot.stop();
 
                 robot.forward(0.75);//////54 MOVE UP TO LINE
-                sleep(1350);///was 1600
+                sleep(1250);///was 1600
                 robot.forward(0.25);
                 sleep(200);
                 robot.stop();
@@ -392,7 +394,7 @@ public class Blue_AutonOpenCV extends LinearOpMode {
                 // robot.elbow.setPosition(0.1);
 
                 robot.right(0.5);/////// 28
-                sleep(2500);
+                sleep(2200);/// was 2700
                 robot.stop();
 
 
