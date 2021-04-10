@@ -106,7 +106,7 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 robot.stop();
 
                 robot.forward(0.75);//////54 up to line to shoot
-                sleep(1350);///was 1600
+                sleep(1250);///was 1600
                 robot.forward(0.25);
                 sleep(200);
                 robot.stop();
@@ -141,7 +141,7 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 robot.elevator.setPower(0);
 
                 robot.left(0.5);/////// 28 to get in line with the rings
-                sleep(1550);
+                sleep(1900);
                 robot.stop();
 
                 robot.elbow.setPosition(0.7);//// get out of the way
@@ -176,7 +176,7 @@ public class Red_AutonOpenCV extends LinearOpMode {
                // robot.wrist.setPosition(0.65);
 
                 robot.forward(0.75);//////42
-                sleep(1250);///162
+                sleep(1400);///162
                 robot.stop();
 
 
@@ -187,7 +187,7 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 sleep(500);
 
                 robot.backward(0.75);//////42
-                sleep(1000);///162
+                sleep(900);///162
                 robot.stop();
 
                 sleep(50000);
@@ -219,7 +219,7 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 robot.stop();
 
                 robot.forward(0.75);//////54
-                sleep(1350);///was 1600
+                sleep(1250);///was 1600
                 robot.forward(0.25);
                 sleep(200);
                 robot.stop();
@@ -254,11 +254,12 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 robot.elevator.setPower(0);
 
                 robot.left(0.5);/////// 28
-                sleep(1500);
+                sleep(2000);
                 robot.stop();
 
-                robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
-                sleep(1500);
+               // robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                robot.elbow.setPosition(0.7);
+                sleep(500);
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
@@ -281,7 +282,7 @@ public class Red_AutonOpenCV extends LinearOpMode {
                // robot.wrist.setPosition(0.65);
 
                 robot.left(0.5);///move to wobble position
-                sleep(1200);
+                sleep(300);// was 1200
                 robot.stop();
                 sleep(50);
 
@@ -399,7 +400,7 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 robot.stop();
 
                 robot.forward(0.75);//////54 MOVE UP TO LINE
-                sleep(1350);///was 1600
+                sleep(1400);///was 1600
                 robot.forward(0.25);
                 sleep(200);
                 robot.stop();
@@ -414,6 +415,10 @@ public class Red_AutonOpenCV extends LinearOpMode {
 
                 robot.hand.setPosition(1);
                 sleep(1000);
+
+                robot.backward(0.5);
+                sleep(200);
+                robot.stop();
 
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -445,12 +450,13 @@ public class Red_AutonOpenCV extends LinearOpMode {
                 //  robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
 
                 robot.left(0.5);/////// 28
-                sleep(1500);
+                sleep(1800);
                 robot.stop();
 
 
-                robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
-                sleep(1500);
+                //robot.wobbleLaunch();////   MAKE SURE ARM IS IN THE RIGHT SPOT
+                robot.elbow.setPosition(0.7);
+                sleep(500);
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////   Flick   ////////////////////////////////////////////////
