@@ -34,7 +34,7 @@ public class Tele_Op extends LinearOpMode {
 
     public void wobbleLift() {
         robot.elbow.setPosition(0.7);
-        robot.shoulder.setPosition(0.66);
+       // robot.shoulder.setPosition(0.66);
         robot.elbow.setPosition(0.2);
         sleep(1250);
     }
@@ -62,6 +62,7 @@ public class Tele_Op extends LinearOpMode {
         boolean wristMovement = true;
         boolean elbowMovement = true;
         boolean intakeIsTrue = true;
+        boolean intakeIsReverse = true;
         boolean elevatorIsTrue = true;
         boolean flickIsTrue = true;
 
@@ -93,6 +94,18 @@ public class Tele_Op extends LinearOpMode {
                 sleep(200);
             }
 
+            //////////////////////////////intake reverse //////////////////////////////////////////
+            if (gamepad1.a && robot.elevator.getCurrentPosition() > -200) {
+                if (intakeIsReverse) {
+                    robot.intake.setPower(1);
+                    intakeIsReverse = false;
+                } else {
+                    robot.intake.setPower(0);
+                    intakeIsReverse = true;
+                }
+                sleep(200);
+            }
+
             double speed = 1;
 
             if (gamepad1.b){
@@ -113,29 +126,19 @@ public class Tele_Op extends LinearOpMode {
                 robot.spinLeft(speed);
             } else if (gamepad1.right_bumper) {
                 robot.spinRight(speed);
-            } else if (gamepad1.y) {
-                robot.fl.setPower(-gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 + gamepad1.right_stick_x / 2);
-                robot.fr.setPower(gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 - gamepad1.right_stick_x / 2);
-                robot.bl.setPower(gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 + gamepad1.right_stick_x / 2);
-                robot.br.setPower(-gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 - gamepad1.right_stick_x / 2);
+            }  else if (gamepad1.y) {
+                robot.fl.setPower(gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 + gamepad1.right_stick_x / 2);
+                robot.fr.setPower(-gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 - gamepad1.right_stick_x / 2);
+                robot.bl.setPower(-gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 + gamepad1.right_stick_x / 2);
+                robot.br.setPower(gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 - gamepad1.right_stick_x / 2);
             } else {
-                robot.fl.setPower(-gamepad1.left_stick_x / 1.33333 - gamepad1.left_stick_y / 1.33333 + gamepad1.right_stick_x / 1.33333);
-                robot.fr.setPower(gamepad1.left_stick_x / 1.33333 - gamepad1.left_stick_y / 1.33333 - gamepad1.right_stick_x / 1.33333);
-                robot.bl.setPower(gamepad1.left_stick_x / 1.33333 - gamepad1.left_stick_y / 1.33333 + gamepad1.right_stick_x / 1.33333);
-                robot.br.setPower(-gamepad1.left_stick_x / 1.33333 - gamepad1.left_stick_y / 1.33333 - gamepad1.right_stick_x / 1.33333);
+                robot.fl.setPower(gamepad1.left_stick_x * speed - gamepad1.left_stick_y * speed + gamepad1.right_stick_x * speed);
+                robot.fr.setPower(-gamepad1.left_stick_x * speed - gamepad1.left_stick_y * speed - gamepad1.right_stick_x * speed);
+                robot.bl.setPower(-gamepad1.left_stick_x * speed - gamepad1.left_stick_y * speed + gamepad1.right_stick_x * speed);
+                robot.br.setPower(gamepad1.left_stick_x * speed - gamepad1.left_stick_y * speed - gamepad1.right_stick_x * speed);
             }
 
-//             else if(gamepad1.y){
-//                robot.fl.setPower(gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
-//                robot.fr.setPower(-gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
-//                robot.bl.setPower(-gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
-//                robot.br.setPower(gamepad1.left_stick_x/2 - gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
-//            }else{
-//                robot.fl.setPower(gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 + gamepad1.right_stick_x/1.33333);
-//                robot.fr.setPower(-gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 - gamepad1.right_stick_x/1.33333);
-//                robot.bl.setPower(-gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 + gamepad1.right_stick_x/1.33333);
-//                robot.br.setPower(gamepad1.left_stick_x/1.33333 - gamepad1.left_stick_y/1.33333 - gamepad1.right_stick_x/1.33333);
-
+            //////changed to 
 
 
 //            telemetry.addData("Shooter Position:", robot.shooter.getCurrentPosition());
@@ -151,7 +154,7 @@ public class Tele_Op extends LinearOpMode {
 
 
             /////// Shooter ////////////////////
-            if (gamepad2.right_trigger > 0.05 && gamepad1.a) {
+            if (gamepad2.right_trigger > 0.05 && gamepad1.x) {
                 robot.shooter.setVelocity(1500);//// was 1650
             } else if (gamepad2.right_trigger > 0.05) {
                 robot.shooter.setVelocity(1650);//// was 1650
@@ -212,11 +215,11 @@ public class Tele_Op extends LinearOpMode {
             /////////////////// Shoulder //////////////////////////
             if (gamepad2.dpad_right) {
 
-                robot.shoulder.setPosition(0.66);
+                //robot.shoulder.setPosition(0.66);
             }
 
             if (gamepad2.dpad_left) {
-                robot.shoulder.setPosition(0);
+              //  robot.shoulder.setPosition(0);
             }
 
 
@@ -232,9 +235,9 @@ public class Tele_Op extends LinearOpMode {
 
             ///////////////////////////////// get ready to grab ////////////////////////////
             if (gamepad2.a) {
-                robot.shoulder.setPosition(0);
-                robot.elbow.setPosition(0.1);// was 0.2
-                robot.wrist.setPosition(0.8);
+              //  robot.shoulder.setPosition(0);
+                robot.elbow.setPosition(1);// was 0.2
+                robot.wrist.setPosition(0.4);// was 0.8
                 robot.hand.setPosition(0);
 
             }
@@ -253,20 +256,20 @@ public class Tele_Op extends LinearOpMode {
 
             ///////////////////////////////// store after picking up ////////////////////////////  0 is close on arm
             if (gamepad2.y) {
-                robot.wrist.setPosition(0.75 );// was 0.65
+                robot.wrist.setPosition(0.3);// was 0.65
                 sleep(100);
-                robot.elbow.setPosition(0.85);/// was 0.9
+                robot.elbow.setPosition(0.3);/// was 0.9
                 robot.hand.setPosition(0);
 
-                robot.shoulder.setPosition(0);
+             //   robot.shoulder.setPosition(0);
 
             }
 
             ///////////////////////////////// get arm over wall //////////////////////////// needs work
             if (gamepad2.x) {
-                robot.shoulder.setPosition(0.66);
-                robot.elbow.setPosition(0.4);
-                robot.wrist.setPosition(0.65);
+               // robot.shoulder.setPosition(0.66);
+                robot.elbow.setPosition(0.6);
+                robot.wrist.setPosition(0.5);
                 robot.hand.setPosition(0);
 
             }
