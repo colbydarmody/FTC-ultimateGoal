@@ -33,11 +33,11 @@ public class BluePipeline extends OpenCvPipeline
 
     // THE FRAME IS 320 x 240 PIXELS.
     // THIS DEFINES THE TOP LEFT OF THE SEARCH AREA
-    static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(300, 120 - (75/2));///// original 210,  120
+    static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(350, 185 - (75/2));///// original 210,  120
 
     // THIS IS THE SIZE (IN PIXELS) OF THE SEARCH AREA
     static final int REGION_WIDTH = 135;//// was 50
-    static final int REGION_HEIGHT = 140;//// wad 75
+    static final int REGION_HEIGHT = 125;//// wad 75
 
     // THESE ARE HOW MUCH ORANGE NEEDS TO BE IN FRAME TO BE CONSIDERED ONE OR FOUR RINGS
     final int FOUR_RING_THRESHOLD = 37  ;/// was 70
