@@ -115,17 +115,17 @@ public class Tele_Op extends LinearOpMode {
             }
 
             if (gamepad1.dpad_up) {
-                robot.forward(speed); // Need to increase due to the immense weight of the robot
+                robot.forward(0.4); // Need to increase due to the immense weight of the robot
             } else if (gamepad1.dpad_down) {
-                robot.backward(speed);
+                robot.backward(0.4);
             } else if (gamepad1.dpad_left) {
-                robot.left(speed);
+                robot.left(0.4);
             } else if (gamepad1.dpad_right) {
-                robot.right(speed);
+                robot.right(0.4);
             } else if (gamepad1.left_bumper) {
-                robot.spinLeft(speed);
+                robot.spinLeft(0.25);
             } else if (gamepad1.right_bumper) {
-                robot.spinRight(speed);
+                robot.spinRight(0.25);
             }  else if (gamepad1.y) {
                 robot.fl.setPower(gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 + gamepad1.right_stick_x / 2);
                 robot.fr.setPower(-gamepad1.left_stick_x / 2 - gamepad1.left_stick_y / 2 - gamepad1.right_stick_x / 2);
