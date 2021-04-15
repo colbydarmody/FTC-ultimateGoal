@@ -195,19 +195,19 @@ public class Tele_Op extends LinearOpMode {
                 if (robot.elevator.getCurrentPosition() > -1175) {
                     robot.elevator.setPower(gamepad2.left_stick_y);
                 }
-                if (robot.elevator.getCurrentPosition() < -1150) {
-                    robot.lightsaber.setPosition(0.65);
-                    robot.elevator.setPower(0);
-                }
+//                if (robot.elevator.getCurrentPosition() < -1150) {
+//                    robot.lightsaber.setPosition(0.65);
+//                    robot.elevator.setPower(0);
+//                }
             }
 
             if (gamepad2.left_stick_y < -0.2) {
                 if (robot.elevator.getCurrentPosition() < 0) {
                     robot.elevator.setPower(gamepad2.left_stick_y);
                 }
-                if (robot.elevator.getCurrentPosition() > -1140) {
-                    robot.lightsaber.setPosition(0);
-                }
+//                if (robot.elevator.getCurrentPosition() > -1140) {
+//                    robot.lightsaber.setPosition(0);
+//                }
             } else {
                 robot.elevator.setPower(gamepad2.left_stick_y / 3);
             }
@@ -237,7 +237,7 @@ public class Tele_Op extends LinearOpMode {
             if (gamepad2.a) {
               //  robot.shoulder.setPosition(0);
                 robot.elbow.setPosition(1);// was 0.2
-                robot.wrist.setPosition(0.4);// was 0.8
+                robot.wrist.setPosition(0.3);// was 0.8
                 robot.hand.setPosition(0);
 
             }
