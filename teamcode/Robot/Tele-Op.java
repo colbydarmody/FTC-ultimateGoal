@@ -87,7 +87,7 @@ public class Tele_Op extends LinearOpMode {
                 if (intakeIsTrue) {
                     robot.intake.setPower(-1);
                     intakeIsTrue = false;
-                } else {
+//                } else {
                     robot.intake.setPower(0);
                     intakeIsTrue = true;
                 }
@@ -202,7 +202,7 @@ public class Tele_Op extends LinearOpMode {
             }
 
             if (gamepad2.left_stick_y < -0.2) {
-                if (robot.elevator.getCurrentPosition() < 0) {
+                if (robot.elevator.getCurrentPosition() < 25) {
                     robot.elevator.setPower(gamepad2.left_stick_y);
                 }
 //                if (robot.elevator.getCurrentPosition() > -1140) {
